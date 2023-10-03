@@ -1,0 +1,6 @@
+*.o
+a.out
+practice/
+memo.txt
+submit/
+.vscode/
