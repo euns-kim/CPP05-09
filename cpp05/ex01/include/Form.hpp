@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:56:44 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/03 19:25:24 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:19:10 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@
 # include <exception>
 # include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
 
 	private:
 		std::string const	_name;
-		bool				_isSigned;
-		int	const			_gradeToSign;
 		int	const			_gradeToExecute;
+		int	const			_gradeToSign;
+		bool				_isSigned;
 		
 
 	public:
@@ -55,6 +57,6 @@ class Form
 
 };
 
-std::ostream	&operator<<(std::ostream &o, const Form &Form);
+std::ostream	&operator<<(std::ostream &o, const Form &form);
 
 #endif

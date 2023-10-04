@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:25:00 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/03 18:47:05 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/04 15:35:51 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int main(void)
     }
 	cout << endl;
 	try {
-        Bureaucrat b("Pippin", 150);
+        Bureaucrat b("Roll", 150);
         
         cout << b << endl;
         b.decrementGrade();

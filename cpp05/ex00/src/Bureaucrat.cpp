@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:38:16 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/03 18:08:09 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:23:23 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ void	Bureaucrat::decrementGrade(void)
 }
 
 const char	*Bureaucrat::GradeTooLowException::what(void) const throw() {
-    return ("\x1B[38;2;224;224;224mGrade too low\x1B[0m");
+    return ("\x1B[38;2;224;224;224mGrade is too low\x1B[0m");
 }
 
 const char	*Bureaucrat::GradeTooHighException::what(void) const throw() {
-    return ("\x1B[38;2;224;224;224mGrade too high\x1B[0m");
+    return ("\x1B[38;2;224;224;224mGrade is too high\x1B[0m");
 }
 
 std::ostream	&operator<<(std::ostream &o, const Bureaucrat &bureaucrat)

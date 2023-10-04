@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:38:16 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/03 19:27:12 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:25:29 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,25 @@ void	Bureaucrat::decrementGrade(void)
 	_grade += 1;
 }
 
-void	Bureaucrat::signForm(Form const &f)
+void	Bureaucrat::signForm(Form &f)
 {
-	if (f.getIsSigned() == true)
-		std::cout << getName() << " signed " << f.getName() << std::endl;
-	else
-		std::cout << getName() << " couldn't sign " << f.getName() << " because <reason>" << std::endl;
+	try {
+		f.beSigned(*this);
+		std::cout << PINK << "* " << getName() << " signed " << f.getName() << RESET << std::endl;
+	} catch (std::exception &e) {
+		std::cout << PINK << "* " << getName() << " couldn't sign " << f.getName() << " because " << e.what() << RESET << std::endl;
+	}
 }
 
 const char	*Bureaucrat::GradeTooLowException::what(void) const throw() {
-    return ("\x1B[38;2;224;224;224m[Bureaucrat] Grade too low\x1B[0m");
+    return ("\x1B[38;2;224;224;224m[Bureaucrat] Grade is too low\x1B[0m");
 }
 
 const char	*Bureaucrat::GradeTooHighException::what(void) const throw() {
-    return ("\x1B[38;2;224;224;224m[Bureaucrat] Grade too high\x1B[0m");
+    return ("\x1B[38;2;224;224;224m[Bureaucrat] Grade is too high\x1B[0m");
 }
 
 std::ostream	&operator<<(std::ostream &o, const Bureaucrat &bureaucrat)
 {
-	return (o << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << "." << std::endl);
+	return (o << PINK << "* " << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << "." << RESET << std::endl);
 }

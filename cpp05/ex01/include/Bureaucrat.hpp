@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:14:54 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/03 19:04:26 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:25:06 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <iostream>
 # include <exception>
 # include "Form.hpp"
+
+class Form;
 
 # define RESET	"\x1B[0m"
 # define PINK	"\x1B[38;2;255;204;229m"
@@ -50,7 +52,7 @@ class Bureaucrat
 		void	incrementGrade(void);
 		void	decrementGrade(void);
 
-		void	signForm(Form const &f);
+		void	signForm(Form &f);
 
 		class GradeTooHighException : public std::exception
 		{		
