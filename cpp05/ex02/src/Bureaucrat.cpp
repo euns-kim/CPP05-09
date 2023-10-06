@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:38:16 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/06 16:22:01 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/06 19:46:44 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,26 @@ void	Bureaucrat::signForm(AForm &f)
 		f.beSigned(*this);
 		std::cout << PINK << "* " << getName() << " signed " << f.getName() << RESET << std::endl;
 	} catch (std::exception &e) {
-		std::cout << PINK << "* " << getName() << " couldn't sign " << f.getName() << " because " << e.what() << RESET << std::endl;
+		std::cerr << GREY << "* " << getName() << " couldn't sign " << f.getName() << " because " << e.what() << RESET << std::endl;
+	}
+}
+
+void	Bureaucrat::executeForm(AForm const &f)
+{
+	try {
+		f.execute(*this);
+		std::cout << PINK <<  "* " << getName() << " executed " << f.getName() << RESET << std::endl;
+	} catch (std::exception &e) {
+		std::cerr << GREY << "* " << getName() << " couldn't execute " << f.getName() << " because " << e.what() << RESET << std::endl;
 	}
 }
 
 const char	*Bureaucrat::GradeTooLowException::what(void) const throw() {
-    return ("\x1B[38;2;224;224;224m[Bureaucrat] Grade is too low\x1B[0m");
+    return ("\x1B[38;2;224;224;224mgrade is too low\x1B[0m");
 }
 
 const char	*Bureaucrat::GradeTooHighException::what(void) const throw() {
-    return ("\x1B[38;2;224;224;224m[Bureaucrat] Grade is too high\x1B[0m");
+    return ("\x1B[38;2;224;224;224mgrade is too high\x1B[0m");
 }
 
 std::ostream	&operator<<(std::ostream &o, const Bureaucrat &bureaucrat)

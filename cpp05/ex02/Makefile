@@ -6,7 +6,7 @@
 #    By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 16:56:51 by eunskim           #+#    #+#              #
-#    Updated: 2023/10/06 16:01:42 by eunskim          ###   ########.fr        #
+#    Updated: 2023/10/06 19:41:53 by eunskim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CYAN    := \033[36;1m
 WHITE   := \033[37;1m
 RESET   := \033[0m
 
-NAME = SignForm
+NAME = 28B
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
@@ -34,7 +34,7 @@ SRC = \
 PresidentialPardonForm.cpp \
 RobotomyRequestForm.cpp \
 ShrubberyCreationForm.cpp \
-Form.cpp \
+AForm.cpp \
 Bureaucrat.cpp \
 main.cpp
 SRCS = $(addprefix $(SRC_DIR),$(SRC))

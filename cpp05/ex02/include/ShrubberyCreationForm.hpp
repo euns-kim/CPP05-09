@@ -6,13 +6,14 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:13:58 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/06 17:10:56 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/06 20:13:36 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHRUBBERYCREATIONFORM_HPP
 # define SHRUBBERYCREATIONFORM_HPP
 
+# include <fstream>
 # include "AForm.hpp"
 
 class ShrubberyCreationForm : public AForm
@@ -28,6 +29,7 @@ class ShrubberyCreationForm : public AForm
 		~ShrubberyCreationForm(void);
 
 		void	execute(Bureaucrat const &executor) const;
+		void	printTree(std::ostream &ofs) const;
 
 		class FileOpenErrorException : public std::exception
 		{

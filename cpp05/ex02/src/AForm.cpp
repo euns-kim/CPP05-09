@@ -71,6 +71,14 @@ int	const	&AForm::getGradeToExecute(void) const
 	return (_gradeToExecute);
 }
 
+void	AForm::checkRequirements(Bureaucrat const &b) const
+{
+	if (_isSigned == false)
+		throw FormUnsignedException();
+	else if (b.getGrade() > _gradeToExecute)
+		throw GradeTooLowException();
+}
+
 void	AForm::beSigned(Bureaucrat const &b)
 {
 	if (b.getGrade() <= _gradeToSign)
@@ -80,16 +88,20 @@ void	AForm::beSigned(Bureaucrat const &b)
 }
 
 const char	*AForm::GradeTooLowException::what(void) const throw() {
-    return ("\x1B[38;2;255;204;229mgrade is too low\x1B[0m");
+    return ("\x1B[38;2;224;224;224mgrade is too low\x1B[0m");
 }
 
 const char	*AForm::GradeTooHighException::what(void) const throw() {
-    return ("\x1B[38;2;255;204;229mgrade is too high\x1B[0m");
+    return ("\x1B[38;2;224;224;224mgrade is too high\x1B[0m");
+}
+
+const char	*AForm::FormUnsignedException::what(void) const throw() {
+    return ("\x1B[38;2;224;224;224mthe form is unsigned\x1B[0m");
 }
 
 std::ostream	&operator<<(std::ostream &o, const AForm &f)
 {
-	return (o << ICE << "* AForm name : " << f.getName() << std::endl \
+	return (o << ICE << "* Form name : " << f.getName() << std::endl \
 	<< "* Grade to sign : " << f.getGradeToSign() << std::endl \
 	<< "* Grade to execute : " << f.getGradeToExecute() << std::endl \
 	<< "* Signed : " << (f.getIsSigned() ? "yes" : "no") << RESET << std::endl);

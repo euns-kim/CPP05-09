@@ -28,6 +28,9 @@ class AForm
 		int	const			_gradeToSign;
 		bool				_isSigned;
 
+	protected:
+		void	checkRequirements(Bureaucrat const &b) const;
+
 	public:
 		AForm(void);
 		AForm(std::string const &name, int gradeToSign, int gradeToExecute);
@@ -39,7 +42,7 @@ class AForm
 		bool const			&getIsSigned(void) const;
 		int const			&getGradeToSign(void) const;
 		int const			&getGradeToExecute(void) const;
-	
+
 		void			beSigned(Bureaucrat const &b);
 		virtual void	execute(Bureaucrat const &executor) const = 0;
 
