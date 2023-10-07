@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:25:00 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/06 21:46:51 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/07 14:09:36 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(void)
 		Intern	someRandomIntern;
 		AForm	*rrf;
 
-		rrf = someRandomIntern.makeForm("shrubbery creation", "teddy bear");
+		rrf = someRandomIntern.makeForm("shrubbery creation", "hill");
 		cout << *rrf << endl;
 		delete rrf;
 	}
@@ -40,7 +40,7 @@ int main(void)
 		Intern	someRandomIntern;
 		AForm	*rrf;
 
-		rrf = someRandomIntern.makeForm("presidential pardon", "red light");
+		rrf = someRandomIntern.makeForm("presidential pardon", "teddy bear");
 		cout << *rrf << endl;
 		delete rrf;
 	}
