@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:41:43 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/09 19:42:12 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:54:22 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,30 @@
 void	ScalarConverter::scalarConverter(std::string input)
 {
 	trimWhitespaces(input);
-	if (input.length() == 0)
+	if (input.length() == 0) // throw exception for empty input
 		throw InvalidInputException();
 	parser(input);
 }
 
 void	ScalarConverter::trimWhitespaces(std::string &input)
 {
-	input.erase(0, input.find_first_not_of(WHITESPACES));
-	input.erase(input.find_first_not_of(WHITESPACES) + 1);
+	input.erase(0, input.find_first_not_of(WHITESPACES)); // trim leading white space
+	input.erase(input.find_first_not_of(WHITESPACES) + 1); // trim trailing white space
 }
 
 void	ScalarConverter::parser(std::string input)
 {
-	if (handlePseudoLiteral(input) || isChar(input)) // parse valid non-numeral input
+	if (handlePseudoLiteral(input) || isChar(input)) // parse valid non-numeric input
 		return ;
-	checkInvalidCharacter(input); // filter once some invalid inputs
-	catchDataType(input); // get data type of numeral input while checking final validity
+	//  checkInvalidCharacter(input); // filter once some invalid inputs
+	_strInput = input;
+	catchNumericDataType(); // get data type of numeric input
 }
 
 bool	ScalarConverter::handlePseudoLiteral(std::string const input)
 {
-	if (input == "-inff" || input == "+inff" || input == "nanf" \
-	|| input == "-inf" || input == "+inf" || input == "nan")
+	if (input == "-inff" || input == "inff" || input == "+inff" || input == "nanf" \
+	|| input == "-inf" || input == "inf" || input == "+inf" || input == "nan")
 	{
 		_strInput = input;
 		_type = PLITERAL;
@@ -50,7 +51,7 @@ bool	ScalarConverter::handlePseudoLiteral(std::string const input)
 
 bool	ScalarConverter::isChar(std::string const input)
 {
-	if (input.length() == 1 && std::isalpha(input[0]))
+	if (input.length() == 1 && !std::isdigit(input[0]))
 	{
 		_strInput = input;
 		_type = PLITERAL;
@@ -59,26 +60,34 @@ bool	ScalarConverter::isChar(std::string const input)
 	return (false);
 }
 
-void	ScalarConverter::checkInvalidCharacter(std::string input)
-{
-	// check if the str only contains valid characters
-	std::string	allowedChars = "0123456789+-.f";
-	size_t		foundPos = input.find_first_not_of(allowedChars);
-	if (foundPos != std::string::npos)
-		throw InvalidInputException();
+// void	ScalarConverter::checkInvalidCharacter(std::string input)
+// {
+// 	// check if the str only contains valid characters
+// 	std::string	allowedChars = "0123456789+-.f";
+// 	size_t		foundPos = input.find_first_not_of(allowedChars);
+// 	if (foundPos != std::string::npos)
+// 		throw InvalidInputException();
 
-	// only one sign char at the beginning of the str is allowed
-	std::string	signs = "+-";
-	size_t		signPos = input.find_first_of("+-");
-	if (signPos != std::string::npos && signPos != 0 \
-	&& (input.substr(1).find_first_of("+-") != std::string::npos))
-		throw InvalidInputException();
-}
+// 	// only one sign char at the beginning of the str is allowed
+// 	std::string	signs = "+-";
+// 	size_t		signPos = input.find_first_of("+-");
+// 	if (signPos != std::string::npos && signPos != 0 \
+// 	&& (input.substr(1).find_first_of("+-") != std::string::npos))
+// 		throw InvalidInputException();
+// }
 
-void	ScalarConverter::catchDataType(std::string input)
+void	ScalarConverter::catchNumericDataType(void)
 {
-	// size_t	pointPos = input.find_first_of(".");
-	// if (pointPos == std::string::npos)
+	std::istringstream	inputStream(_strInput);
+
+	if (_strInput.find_first_of("f") != std::string::npos && inputStream >> _data.floatValue)
+		_type = FLOAT;
+	else if (_strInput.find_first_of(".") != std::string::npos && inputStream >> _data.doubleValue)
+		_type = DOUBLE;
+	else if (inputStream >> _data.intValue)
+		_type = INT;
+	else
+		throw InvalidInputException();
 }
 
 const char	*ScalarConverter::InvalidInputException::what(void) const throw() {

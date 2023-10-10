@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:54:32 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/09 19:44:45 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:58:36 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <exception>
 # include <string>
+# include <sstream>
 
 # define RESET	"\x1B[0m"
 # define PINK	"\x1B[38;2;255;204;229m"
@@ -34,11 +35,17 @@ using std::cout;
 using std::cerr;
 using std::endl;
 
+/**
+ * Static functions of the class belong to the class itself, not to an instance.
+ * So it is possible to use those without creating an instance of the class.
+ * Private static functions can be called only in a public static function of the same class.
+ * Variables of the class below are also declared as static, so that it can be used without any instance.
+ */
+
 class ScalarConverter
 {
 
 	private:
-		static long double	_input;
 		static std::string	_strInput;
 
 		enum eType {
@@ -53,10 +60,10 @@ class ScalarConverter
 		static eType	_type;
 
 		union uData {
-			int intValue;
-        	double doubleValue;
-        	float floatValue;
-        	char charValue;
+			int		intValue;
+        	double	doubleValue;
+        	float	floatValue;
+        	char	charValue;
 		};
 
 		static uData	_data;
@@ -72,8 +79,8 @@ class ScalarConverter
 		static void	trimWhitespaces(std::string &input);
 		static bool	handlePseudoLiteral(std::string const input);
 		static bool	isChar(std::string const input);
-		static void	checkInvalidCharacter(std::string input);
-		static void	catchDataType(std::string input);
+		// static void	checkInvalidCharacter(std::string input);
+		static void	catchNumericDataType(void);
 
 		/* Converter */
 		static void	convertToChar(void);
