@@ -6,7 +6,7 @@
 #    By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:12:32 by eunskim           #+#    #+#              #
-#    Updated: 2023/10/09 17:26:26 by eunskim          ###   ########.fr        #
+#    Updated: 2023/10/13 15:07:24 by eunskim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,9 @@ HEADERS = -I $(INCLUDE_DIR)
 
 SRC_DIR = ./src/
 SRC = \
-ScalarConverterPrinter.cpp \
 ScalarConverterConverter.cpp \
 ScalarConverterParser.cpp \
-ScalarConverterOrthodox.cpp \
+ScalarConverter.cpp \
 main.cpp
 SRCS = $(addprefix $(SRC_DIR),$(SRC))
 

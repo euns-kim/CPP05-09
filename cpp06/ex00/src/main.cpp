@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:53:59 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/09 18:22:28 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/13 14:48:47 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	else
 	{
 		try {
-			ScalarConverter::scalarConverter(argv[2]);
+			ScalarConverter::scalarConverter(argv[1]);
 		} catch (std::exception &e) {
 			cerr << "Program failed because " << e.what() << endl;
 			return (EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:54:32 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/10 17:58:36 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/13 15:50:46 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <exception>
 # include <string>
 # include <sstream>
+# include <limits>
+# include <iomanip>
 
 # define RESET	"\x1B[0m"
 # define PINK	"\x1B[38;2;255;204;229m"
@@ -42,31 +44,29 @@ using std::endl;
  * Variables of the class below are also declared as static, so that it can be used without any instance.
  */
 
+enum eType {
+	ERROR,
+	PLITERAL,
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE
+};
+
+union uData {
+	int		intValue;
+	double	doubleValue;
+	float	floatValue;
+	char	charValue;
+};
+
 class ScalarConverter
 {
 
 	private:
 		static std::string	_strInput;
-
-		enum eType {
-			CHAR,
-			INT,
-			FLOAT,
-			DOUBLE,
-			PLITERAL,
-			ERROR
-		};
-
-		static eType	_type;
-
-		union uData {
-			int		intValue;
-        	double	doubleValue;
-        	float	floatValue;
-        	char	charValue;
-		};
-
-		static uData	_data;
+		static eType		_type;
+		static uData		_data;
 
 		/* Orthodox Canonical Form */
 		ScalarConverter(void);
@@ -75,24 +75,20 @@ class ScalarConverter
 		~ScalarConverter(void);
 
 		/* Parser */
-		static void	parser(std::string input);
-		static void	trimWhitespaces(std::string &input);
-		static bool	handlePseudoLiteral(std::string const input);
-		static bool	isChar(std::string const input);
-		// static void	checkInvalidCharacter(std::string input);
-		static void	catchNumericDataType(void);
+		static void		parser(std::string input);
+		static void		trimWhitespaces(std::string &input);
+		static bool		isPseudoLiteral(std::string const input);
+		static bool		isChar(std::string const input);
+		static eType	catchNumericDataType(void);
+		static void		parseNumericData(void);
 
 		/* Converter */
-		static void	convertToChar(void);
-		static void	convertToInt(void);
-		static void	convertToFloat(void);
-		static void	convertToDouble(void);
-
-		/* Printer */
-		static void	printCharValue(void);
-		static void	printIntValue(void);
-		static void	printFloatValue(void);
-		static void	printDoubleValue(void);
+		static void	switchConverter(void);
+		static void	handlePseudoLiteral(void);
+		static void	convertCharValue(void);
+		static void	convertIntValue(void);
+		static void	convertFloatValue(void);
+		static void	convertDoubleValue(void);
 
 	public:
 		static void	scalarConverter(std::string input);
