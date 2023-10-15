@@ -6,7 +6,7 @@
 #    By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/15 17:36:34 by eunskim           #+#    #+#              #
-#    Updated: 2023/10/15 21:06:25 by eunskim          ###   ########.fr        #
+#    Updated: 2023/10/15 21:21:36 by eunskim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CYAN    := \033[36;1m
 WHITE   := \033[37;1m
 RESET   := \033[0m
 
-NAME = whatever
+NAME = iter
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98

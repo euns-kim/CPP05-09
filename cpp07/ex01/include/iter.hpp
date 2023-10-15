@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 17:43:01 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/15 21:09:21 by eunskim          ###   ########.fr       */
+/*   Created: 2023/10/15 21:12:39 by eunskim           #+#    #+#             */
+/*   Updated: 2023/10/15 21:32:18 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#ifndef ITER_HPP
+# define ITER_HPP
 
 # include <iostream>
 
-template <typename T_SWAP>
-void	swap(T_SWAP &a, T_SWAP &b)
+template <typename T>
+void	printT(T value)
 {
-	T_SWAP	tmp;
-
-	tmp = a;
-	a = b;
-	b = tmp;
+	std::cout << value << " ";
 }
 
-template <typename T_MIN>
-T_MIN	min(T_MIN a, T_MIN b)
+template <typename T, typename Func>
+void	iter(T *arr, int len, Func f)
 {
-	return (a < b ? a : b);
-}
-
-template <typename T_MAX>
-T_MAX	max(T_MAX a, T_MAX b)
-{
-	return (a > b ? a : b);
+	for (int i = 0; i < len; i++)
+		f(arr[i]);
 }
 
 #endif

@@ -6,28 +6,26 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:44:54 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/15 21:05:17 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/15 21:34:03 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Whatever.hpp"
+#include "iter.hpp"
 
 int	main(void)
 {
-	int a = 2;
-	int b = 3;
+	int int_arr[] = {5, 4, 3, 2, 1};
+	::iter(int_arr, 5, printT<int>);
+	std::cout << std::endl;
 
-	::swap( a, b );
-	std::cout << "a = " << a << ", b = " << b << std::endl;
-	std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
-	std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
+	float float_arr[] = {1.3, 1.2, 1.1, 1.0, 0.9, 0.8};
+	::iter(float_arr, 6, printT<float>);
+	std::cout << std::endl;
 
-	std::string c = "chaine1";
-	std::string d = "chaine2";
-	
-	::swap(c, d);
-	std::cout << "c = " << c << ", d = " << d << std::endl;
-	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
-	return 0;
+	char char_arr[] = {'a', 'b', 'c'};
+	::iter(char_arr, 3, printT<char>);
+	std::cout << std::endl;
+
+	std::string	str_arr[] = {"Hello", "World", "Hello"};
+	::iter(str_arr, 3, printT<std::string>);
 }
