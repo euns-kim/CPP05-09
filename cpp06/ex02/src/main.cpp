@@ -6,13 +6,13 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:17:10 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/15 18:57:20 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/15 19:04:24 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <cstdlib>
-#include <chrono>
+#include <ctime>
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
@@ -68,7 +68,7 @@ Base	*generate(void)
 
 int	main(void)
 {	
-	std::srand(std::time(0));
+	std::srand(time(0));
 	
 	Base	*random = generate();
 	identify(random);
