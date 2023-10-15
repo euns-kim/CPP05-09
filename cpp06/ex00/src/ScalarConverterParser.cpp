@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:41:43 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/13 16:17:28 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/15 20:14:53 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ eType	ScalarConverter::catchNumericDataType(void)
 	if (i == _strInput.length())
 		return (INT);
 	else if (_strInput[i++] != '.')
+		return (ERROR);
+	if (!std::isdigit(_strInput[i]))
 		return (ERROR);
 	while (std::isdigit(_strInput[i]))
 		i++;
