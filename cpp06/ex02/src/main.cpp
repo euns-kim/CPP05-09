@@ -6,13 +6,13 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:17:10 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/13 19:54:48 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/15 18:57:20 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
+#include <chrono>
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
@@ -32,15 +32,18 @@ void	identify(Base *p)
 void	identify(Base &p)
 {	
 	try {
-		static_cast<void>(dynamic_cast<A &>(p));
+		A	&a = dynamic_cast<A &>(p);
+		(void) a;
 		std::cout << "A" << std::endl;
 	} catch (...) {
 		try {
-			static_cast<void>(dynamic_cast<B &>(p));
+			B	&b = dynamic_cast<B &>(p);
+			(void) b;
 			std::cout << "B" << std::endl;
 		} catch (...) {
 			try {
-				static_cast<void>(dynamic_cast<C &>(p));
+				C	&c = dynamic_cast<C &>(p);
+				(void) c;
 				std::cout << "C" << std::endl;
 			} catch (...) {
 				std::cout << "ERROR" << std::endl;
@@ -51,7 +54,6 @@ void	identify(Base &p)
 
 Base	*generate(void)
 {
-	std::srand(static_cast<unsigned>(std::time(0)));
 	int	ran = std::rand() % 3;
 
 	// std::cout << "randomly generated number: " << ran << std::endl;
@@ -65,9 +67,21 @@ Base	*generate(void)
 }
 
 int	main(void)
-{
+{	
+	std::srand(std::time(0));
+	
 	Base	*random = generate();
 	identify(random);
 	identify(*random);
 	delete random;
+
+	Base	*random2 = generate();
+	identify(random2);
+	identify(*random2);
+	delete random2;
+
+	Base	*random3 = generate();
+	identify(random3);
+	identify(*random3);
+	delete random3;
 }

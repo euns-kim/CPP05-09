@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:53:35 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/13 16:25:46 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/15 18:43:21 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	ScalarConverter::convertCharValue(void)
 void	ScalarConverter::convertIntValue(void)
 {
 	// print char
-	if ((_data.charValue >= -128 && _data.charValue < 32) || _data.charValue == 127)
+	if ((_data.intValue >= -128 && _data.intValue < 32) || _data.intValue == 127)
 		cout << LEMON << "char: non displayable" << RESET << endl;
-	else if (_data.charValue < -128 || _data.charValue > 127)
+	else if (_data.intValue < -128 || _data.intValue > 127)
 		cout << LEMON << "char: impossible" << RESET << endl;
 	else
 		cout << LEMON << "char: '" << static_cast<char>(_data.intValue) << "'" << RESET << endl;
@@ -55,9 +55,9 @@ void	ScalarConverter::convertIntValue(void)
 void	ScalarConverter::convertFloatValue(void)
 {
 	// print char
-	if ((_data.charValue >= -128 && _data.charValue < 32) || _data.charValue == 127)
+	if ((_data.floatValue >= -128 && _data.floatValue < 32) || _data.floatValue == 127)
 		cout << LEMON << "char: non displayable" << RESET << endl;
-	else if (_data.charValue < -128 || _data.charValue > 127)
+	else if (_data.floatValue < -128 || _data.floatValue > 127)
 		cout << LEMON << "char: impossible" << RESET << endl;
 	else
 		cout << LEMON << "char: '" << static_cast<char>(_data.floatValue) << "'" << RESET << endl;
@@ -78,9 +78,9 @@ void	ScalarConverter::convertFloatValue(void)
 void	ScalarConverter::convertDoubleValue(void)
 {
 	// print char
-	if ((_data.charValue >= -128 && _data.charValue < 32) || _data.charValue == 127)
+	if ((_data.doubleValue >= -128 && _data.doubleValue < 32) || _data.doubleValue == 127)
 		cout << LEMON << "char: non displayable" << RESET << endl;
-	else if (_data.charValue < -128 || _data.charValue > 127)
+	else if (_data.doubleValue < -128 || _data.doubleValue > 127)
 		cout << LEMON << "char: impossible" << RESET << endl;
 	else
 		cout << LEMON << "char: '" << static_cast<char>(_data.doubleValue) << "'" << RESET << endl;
