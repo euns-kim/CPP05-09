@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:53:35 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/15 18:43:21 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/17 16:59:16 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,20 +128,20 @@ void	ScalarConverter::switchConverter(void)
 		case PLITERAL:
 			handlePseudoLiteral();
 			break;
-	    case CHAR:
+		case CHAR:
 			convertCharValue();
-            break;
-        case INT:
+			break;
+		case INT:
 			convertIntValue();
-            break;
-        case FLOAT:
+			break;
+		case FLOAT:
 			convertFloatValue();
-            break;
+			break;
 		case DOUBLE:
 			convertDoubleValue();
 			break;
-        default:
-            throw InvalidInputException();
-            break;
+		default:
+			throw InvalidInputException();
+			break;
 	}
 }

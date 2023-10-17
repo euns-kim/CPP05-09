@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:41:43 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/15 20:14:53 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:08:39 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ eType	ScalarConverter::catchNumericDataType(void)
 	return (ERROR);
 }
 
-void	ScalarConverter::parseNumericData(void)
+void	ScalarConverter::parseNumericData(void) // stoi, stof, stod are introduced in C++11
 {
 	switch (_type)
 	{
