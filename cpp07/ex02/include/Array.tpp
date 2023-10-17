@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:37:09 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/17 15:02:20 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/17 16:56:11 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,23 @@ class Array
 template <typename T>
 Array<T>::Array(void) : _arr(NULL), _size(0)
 {
-    cout << SKY << "Default constructor called" << RESET << endl;
+    // cout << SKY << "Default constructor called" << RESET << endl;
 }
 
 template <typename T>
 Array<T>::Array(unsigned int n) : _size(n)
 {
+    // cout << SKY << "Size constructor called" << RESET << endl;
 	if (n != 0)
 		_arr = new T[n];
 	else
 		_arr = NULL;
-    cout << SKY << "Size constructor called" << RESET << endl;
 }
 
 template <typename T>
 Array<T>::Array(Array &copy)
 {
-	cout << SKY << "Copy constructor called" << RESET << endl;
+	// cout << SKY << "Copy constructor called" << RESET << endl;
 	_size = copy._size;
 	if (copy._arr == NULL)
 		_arr = NULL;
@@ -73,7 +73,7 @@ Array<T>::Array(Array &copy)
 template <typename T>
 Array<T>   &Array<T>::operator=(Array &op)
 {
-    cout << SKY << "Copy assignment operator called" << RESET << endl;
+    // cout << SKY << "Copy assignment operator called" << RESET << endl;
 	if (this != &op)
 	{
 		_size = op._size;
@@ -94,7 +94,7 @@ Array<T>   &Array<T>::operator=(Array &op)
 template <typename T>
 Array<T>::~Array(void)
 {
-    cout << SKY << "Destructor called" << RESET << endl;
+    // cout << SKY << "Destructor called" << RESET << endl;
     if (_arr != NULL)
         delete[] _arr;
 }
