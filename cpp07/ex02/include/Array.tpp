@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:37:09 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/17 16:56:11 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/17 18:45:56 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class Array
         T   &operator[](unsigned int) const;
         int size(void) const;
 
-        void    printArray(void);
+        void    printArray(void) const;
 
         class WrongIndexException : public std::exception
         {
@@ -114,7 +114,7 @@ int Array<T>::size(void) const
 }
 
 template <typename T>
-void	Array<T>::printArray(void)
+void	Array<T>::printArray(void) const
 {
     for (unsigned int i = 0; i < _size; i++)
         cout << _arr[i] << " " << endl;

@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:43:01 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/17 16:55:17 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/17 18:43:42 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	swap(T_SWAP &a, T_SWAP &b)
 }
 
 template <typename T_MIN>
-T_MIN	min(T_MIN a, T_MIN b)
+T_MIN const	&min(T_MIN const &a, T_MIN const &b)
 {
 	return (a < b ? a : b);
 }
 
 template <typename T_MAX>
-T_MAX	max(T_MAX a, T_MAX b)
+T_MAX const	&max(T_MAX const &a, T_MAX const &b)
 {
 	return (a > b ? a : b);
 }

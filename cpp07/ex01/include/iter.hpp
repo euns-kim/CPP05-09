@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 21:12:39 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/17 16:55:37 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/17 18:44:57 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include <iostream>
 
 template <typename T>
-void	printT(T value)
+void	printT(T const &value)
 {
 	std::cout << value << " ";
 }
 
 template <typename T, typename Func>
-void	iter(T *arr, int len, Func f)
+void	iter(T *arr, int const len, Func f)
 {
 	for (int i = 0; i < len; i++)
 		f(arr[i]);
