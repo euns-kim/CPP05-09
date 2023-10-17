@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:17:10 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/15 19:04:24 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:17:11 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,15 @@ void	identify(Base *p)
 void	identify(Base &p)
 {	
 	try {
-		A	&a = dynamic_cast<A &>(p);
-		(void) a;
+		(void) dynamic_cast<A &>(p);
 		std::cout << "A" << std::endl;
 	} catch (...) {
 		try {
-			B	&b = dynamic_cast<B &>(p);
-			(void) b;
+			(void) dynamic_cast<B &>(p);
 			std::cout << "B" << std::endl;
 		} catch (...) {
 			try {
-				C	&c = dynamic_cast<C &>(p);
-				(void) c;
+				(void) dynamic_cast<C &>(p);
 				std::cout << "C" << std::endl;
 			} catch (...) {
 				std::cout << "ERROR" << std::endl;

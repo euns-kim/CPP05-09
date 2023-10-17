@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:41:43 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/17 17:08:39 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:15:45 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,12 @@ eType	ScalarConverter::catchNumericDataType(void)
 	return (ERROR);
 }
 
-void	ScalarConverter::parseNumericData(void) // stoi, stof, stod are introduced in C++11
+void	ScalarConverter::parseNumericData(void)
 {
+	// stoi, stof, stod are introduced in C++11, about which I got to know after the validation
+	// it compiled with -std=c++98 flag because of the compiler providing some c++11 features
+	// i chose to leave this as it is because of some design issues
+	// when using strtoi, strtof, strtod or istringstream, overflow must be checked manually
 	switch (_type)
 	{
 	    case INT:
