@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:37:09 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/17 18:45:56 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/17 18:49:19 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ class Array
         Array &operator=(Array &op);
         ~Array(void);
 
-        T   &operator[](unsigned int) const;
-        int size(void) const;
+        T	&operator[](unsigned int) const;
+        int	size(void) const;
 
         void    printArray(void) const;
 
@@ -100,7 +100,7 @@ Array<T>::~Array(void)
 }
 
 template <typename T>
-T   &Array<T>::operator[](unsigned int i) const
+T	&Array<T>::operator[](unsigned int i) const
 {
     if (i >= _size)
         throw WrongIndexException();
