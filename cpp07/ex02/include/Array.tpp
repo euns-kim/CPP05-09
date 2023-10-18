@@ -6,7 +6,7 @@
 /*   By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:37:09 by eunskim           #+#    #+#             */
-/*   Updated: 2023/10/17 18:49:19 by eunskim          ###   ########.fr       */
+/*   Updated: 2023/10/18 13:03:24 by eunskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ class Array
     public:
         Array(void);
         Array(unsigned int n);
-        Array(Array &copy);
-        Array &operator=(Array &op);
+        Array(Array<T> &copy);
+        Array &operator=(Array<T> &op);
         ~Array(void);
 
         T	&operator[](unsigned int) const;
@@ -56,7 +56,7 @@ Array<T>::Array(unsigned int n) : _size(n)
 }
 
 template <typename T>
-Array<T>::Array(Array &copy)
+Array<T>::Array(Array<T> &copy)
 {
 	// cout << SKY << "Copy constructor called" << RESET << endl;
 	_size = copy._size;
@@ -71,7 +71,7 @@ Array<T>::Array(Array &copy)
 }
 
 template <typename T>
-Array<T>   &Array<T>::operator=(Array &op)
+Array<T>   &Array<T>::operator=(Array<T> &op)
 {
     // cout << SKY << "Copy assignment operator called" << RESET << endl;
 	if (this != &op)
