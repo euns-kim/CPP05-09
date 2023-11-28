@@ -12,18 +12,17 @@ Span::Span(unsigned int size) : _size(size)
 	// std::cout << "[Span] Size constructor called" << RESET << std::endl;
 }
 
-Span::Span(const Span &copy)
+Span::Span(const Span &copy) : _container(copy._container), _size(copy._size)
 {
 	// std::cout << "[Span] Copy constructor called" << RESET << std::endl;
-	*this = copy;
 }
 
 Span &Span::operator=(const Span &op)
 {
 	if (this != &op)
 	{
-		this._size = op._size;
-		this._container.assign(op._container.begin(), op._container.end());
+		this->_size = op._size;
+		this->_container = op._container;
 	}
 	// std::cout << "[Span] Copy assignment operator called" << RESET << std::endl;
 	return (*this);
@@ -36,7 +35,7 @@ Span::~Span(void)
 
 /* Method functions */
 
-void	Span::addNumber(int n);
+void	Span::addNumber(int n)
 {
 	if (_container.size() < _size)
 		_container.push_back(n);
@@ -44,39 +43,54 @@ void	Span::addNumber(int n);
 		throw std::logic_error("the container is already full");
 }
 
-void	Span::fillContainerRandom(void);
+void	Span::fillContainerRandom(void)
 {
-	currSize = _container.size();
+	unsigned int currSize = _container.size();
 	if (currSize == _size || _size == 0)
 		return ;
 
 	std::vector<int> tmp(_size - currSize);
 	std::vector<int>::iterator itr = tmp.begin();
 	for (; itr != tmp.end(); itr++)
-		*itr = rand() % 30000;
-	_container.insert(tmp.begin(), itr);
+		*itr = rand() % 30000 - 15000;
+	_container.insert(_container.end(), tmp.begin(), itr);
 }
 
-void	Span::checkException(void);
+void	Span::checkException(void)
 {
 	if (_container.size() == 0 || _container.size() == 1)
-		throw std::logic_error("size too small to calculate spans");
+		throw std::logic_error("the container size too small to calculate spans");
 }
 
-int		Span::shortestSpan(void);
+unsigned int	Span::shortestSpan(void)
 {
+	checkException();
+	unsigned int shortest = std::numeric_limits<unsigned int>::max();
 
+	std::sort(_container.begin(), _container.end());
+	std::vector<int>::iterator itr = _container.begin();
+	for (; itr != std::prev(_container.end()); itr++)
+	{
+		unsigned int tmp = static_cast<unsigned int>(*(std::next(itr)) - *itr);
+		shortest = std::min(shortest, tmp);
+	}
+	return (shortest);
 }
 
-int		Span::longestSpan(void);
+unsigned int	Span::longestSpan(void)
 {
-	// max - min
+	checkException();
+
+	int	minElement = *std::min_element(_container.begin(), _container.end());
+    int	maxElement = *std::max_element(_container.begin(), _container.end());
+	return (maxElement - minElement);
 }
 
-void	Span::printContainer(void);
+void	Span::printContainer(void)
 {
 	std::cout << "List of integers: " << std::endl;
-	for (int n : _container)
-		std::cout << n << " ";
+	std::vector<int>::iterator itr = _container.begin();
+	for (; itr != _container.end(); itr++)
+		std::cout << *itr << " ";
 	std::cout << std::endl;
 }

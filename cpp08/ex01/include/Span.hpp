@@ -3,6 +3,9 @@
 
 # include <vector>
 # include <stdexcept>
+# include <iostream>
+# include <algorithm>
+# include <cstdlib>
 
 class Span
 {
@@ -20,13 +23,23 @@ class Span
 		~Span(void);
 
 		/* Method functions */
-		void	addNumber(int n);
-		void	fillContainerRandom(void);
-		void	checkException(void);
-		int		shortestSpan(void);
-		int		longestSpan(void);
-		void	printContainer(void);
+		void			addNumber(int n);
+		void			fillContainerRandom(void);
+		template <typename Itr>
+		void			fillContainerRange(Itr first, Itr last);
+		void			checkException(void);
+		unsigned int	shortestSpan(void);
+		unsigned int	longestSpan(void);
+		void			printContainer(void);
 
 };
+
+template <typename Itr>
+void	Span::fillContainerRange(Itr first, Itr last)
+{
+	if (std::distance(first, last) + _container.size() > _size)
+		throw std::logic_error("no efficient place to insert integers");
+	_container.insert(_container.end(), first, last);
+}
 
 #endif
