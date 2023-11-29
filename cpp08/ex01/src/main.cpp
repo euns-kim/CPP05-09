@@ -14,6 +14,17 @@ int main(void)
 		std::cout << sp.longestSpan() << std::endl;
 	}
 	{
+		Span sp = Span(5);
+		sp.addNumber(0);
+		sp.addNumber(-23);
+		sp.addNumber(-10007);
+		sp.addNumber(-9);
+		sp.addNumber(32);
+
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
+	}
+	{
 		Span sp(10);
 		sp.fillContainerRandom();
 		sp.printContainer();
