@@ -12,7 +12,7 @@ Span::Span(unsigned int size) : _size(size)
 	// std::cout << "[Span] Size constructor called" << RESET << std::endl;
 }
 
-Span::Span(const Span &copy) : _container(copy._container), _size(copy._size)
+Span::Span(const Span &copy) : _container(std::vector<int>(copy._container)), _size(copy._size)
 {
 	// std::cout << "[Span] Copy constructor called" << RESET << std::endl;
 }
@@ -22,7 +22,7 @@ Span &Span::operator=(const Span &op)
 	if (this != &op)
 	{
 		this->_size = op._size;
-		this->_container = op._container;
+		this->_container = std::vector<int>(op._container);
 	}
 	// std::cout << "[Span] Copy assignment operator called" << RESET << std::endl;
 	return (*this);
