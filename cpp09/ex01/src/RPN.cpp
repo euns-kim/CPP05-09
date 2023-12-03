@@ -54,15 +54,15 @@ void	RPN::calculator(char op)
 
     switch (op)
 	{
-        case '+':
+		case '+':
 			_stack.push(lhs + rhs);
-        	break;
-        case '-':
+			break;
+		case '-':
 			_stack.push(lhs - rhs);
-        	break;
-        case '/':
+			break;
+		case '/':
 			_stack.push(lhs / rhs);
-        	break;
+			break;
 		case '*':
 			_stack.push(lhs * rhs);
 			break;
