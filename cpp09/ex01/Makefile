@@ -19,6 +19,7 @@ HEADERS = -I $(INCLUDE_DIR)
 
 SRC_DIR = ./src/
 SRC = \
+RPN.cpp \
 main.cpp
 SRCS = $(addprefix $(SRC_DIR),$(SRC))
 

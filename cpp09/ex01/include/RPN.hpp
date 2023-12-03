@@ -3,6 +3,7 @@
 
 # include <stack>
 # include <iostream>
+# include <string>
 # include <stdexcept>
 
 class RPN
@@ -20,7 +21,8 @@ class RPN
 		RPN &operator=(const RPN &op);
 		~RPN(void);
 
-		void	RPNparser(void);
+		int		safePeekPop(void);
+		void	calculator(char op);
 		void	calculateResult(void);
 		void	printResult(void);
 
