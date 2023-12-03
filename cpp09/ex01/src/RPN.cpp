@@ -56,17 +56,17 @@ void	RPN::calculator(char op)
 	{
         case '+':
 			_stack.push(lhs + rhs);
-            break;
+        	break;
         case '-':
 			_stack.push(lhs - rhs);
-            break;
+        	break;
         case '/':
 			_stack.push(lhs / rhs);
-            break;
+        	break;
 		case '*':
 			_stack.push(lhs * rhs);
 			break;
-        default:
+		default:
 			throw std::logic_error("wrong input. Cannot calculate.");
     }
 }
