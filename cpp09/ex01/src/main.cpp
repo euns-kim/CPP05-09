@@ -1,26 +1,81 @@
-#include "RPN.hpp"
+#include "Span.hpp"
 
-int main(int argc, char **argv)
+int main(void)
 {
-	if (argc != 2)
 	{
-		std::cerr << "Usage: ./rpn [reverse Polish notation]" << std::endl;
-		return (1);
-	}
-	
-	RPN	rpn = RPN(static_cast<std::string>(argv[1]));
+		Span sp = Span(5);
+		sp.addNumber(6);
+		sp.addNumber(3);
+		sp.addNumber(17);
+		sp.addNumber(9);
+		sp.addNumber(11);
 
-	try {
-		rpn.calculateResult();
-		rpn.printResult();
-	} catch (const std::exception &e) {
-		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
+	}
+	{
+		Span sp = Span(5);
+		sp.addNumber(0);
+		sp.addNumber(-23);
+		sp.addNumber(-10007);
+		sp.addNumber(-9);
+		sp.addNumber(32);
+
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
+	}
+	{
+		Span sp(10);
+		sp.fillContainerRandom();
+		sp.printContainer();
+
+		// try {
+		// 	sp.addNumber(10);
+		// } catch (const std::exception &e) {
+		// 	std::cerr << "Exception: " << e.what() << std::endl;
+		// }
+
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
+		sp.printContainer();
+	}
+	{
+		Span sp(10000);
+		std::vector<int> vec;
+		for (unsigned int i = 0; i < 10000; i++)
+			vec.push_back(i);
+
+		sp.fillContainerRange(vec.begin(), vec.end());
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
+	}
+	{
+		Span sp(10000);
+		std::vector<int> vec;
+		for (unsigned int i = 0; i < 10000; i++)
+			vec.push_back(i * 2 - 5000);
+
+		sp.fillContainerRange(vec.begin(), vec.end());
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
+	}
+	{
+		Span sp(1000);
+		std::vector<int> vec;
+		for (unsigned int i = 0; i < 10000; i++)
+			vec.push_back(i * 2 - 5000);
+
+		try {
+			sp.fillContainerRange(vec.begin(), vec.end());
+		} catch (const std::exception &e) {
+			std::cerr << "Exception: " << e.what() << std::endl;
+		}
+
+		try {
+			std::cout << sp.shortestSpan() << std::endl;
+			std::cout << sp.longestSpan() << std::endl;
+		} catch (const std::exception &e) {
+			std::cerr << "Exception: " << e.what() << std::endl;
+		}
 	}
 }
-
-// ./RPN "3 4 5 * +" = 23
-// ./RPN "3 4 + 5 *" = 35
-// ./RPN "3 4 5 * + 4 7 2 - * +" = 43
-// ./RPN "3 4 + 5 + 4 / 0 * 1 * 4 + 5 7 + * 3 /" = 16
-// ./RPN "5 1 2 + 4 * + 3 - 6 2 / +" = 17
-// ./RPN "9 8 4 / * 5 3 2 * - + 9 5 2 3 + + * +" = 107

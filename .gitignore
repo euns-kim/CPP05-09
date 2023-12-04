@@ -5,3 +5,4 @@ memo.txt
 submit/
 .vscode/
 obj/
+.DS_Store

@@ -29,11 +29,11 @@ int main(void)
 		sp.fillContainerRandom();
 		sp.printContainer();
 
-		try {
-			sp.addNumber(10);
-		} catch (const std::exception &e) {
-			std::cerr << "Exception: " << e.what() << std::endl;
-		}
+		// try {
+		// 	sp.addNumber(10);
+		// } catch (const std::exception &e) {
+		// 	std::cerr << "Exception: " << e.what() << std::endl;
+		// }
 
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;

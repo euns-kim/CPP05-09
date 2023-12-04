@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: eunskim <eunskim@student.42heilbronn.de    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/10/17 18:35:16 by eunskim           #+#    #+#              #
+#    Updated: 2023/11/27 18:02:28 by eunskim          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 BLACK   := \033[30;1m
 RED     := \033[31;1m
 GREEN   := \033[32;1m
@@ -8,7 +20,7 @@ CYAN    := \033[36;1m
 WHITE   := \033[37;1m
 RESET   := \033[0m
 
-NAME = RPN
+NAME = Span
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
@@ -19,7 +31,7 @@ HEADERS = -I $(INCLUDE_DIR)
 
 SRC_DIR = ./src/
 SRC = \
-RPN.cpp \
+Span.cpp \
 main.cpp
 SRCS = $(addprefix $(SRC_DIR),$(SRC))
 
