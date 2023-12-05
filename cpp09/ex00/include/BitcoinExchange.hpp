@@ -3,23 +3,33 @@
 
 # include <iostream>
 # include <map>
-# include <string>
+# include "Parser.hpp"
+
+# define DATA "data.csv"
+# define DB std::map<time_t, float>
+
+namespace Database
+{
+	DB initDatabase(void);
+}
 
 class BitcoinExchange
 {
 
 	private:
-		std::map<time_t, float> _database;
-		std::string	_inputFile;
+		static DB _db;
 
-	public:
+		static int errorPrinter(std::string msg);
+		
 		BitcoinExchange(void);
-		BitcoinExchange(std::string inputFile);
 		BitcoinExchange(const BitcoinExchange &copy);
 		BitcoinExchange &operator=(const BitcoinExchange &op);
 		~BitcoinExchange(void);
 
-		time_t makeTime(std::string date);
+	public:
+		static int btc(std::string inputFile);
+
 };
 
+\
 #endif
