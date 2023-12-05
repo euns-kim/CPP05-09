@@ -13,9 +13,10 @@ using std::endl;
 
 namespace Parser
 {
+	int errorPrinter(std::string msg);
 	bool isDate(std::string date);
 	time_t makeTime(std::string date);
 	void trimWhitespaces(std::string &input);
 };
 
-#endif
+#en

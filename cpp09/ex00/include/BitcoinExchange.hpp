@@ -2,24 +2,15 @@
 # define BITCOINEXCHANGE_HPP
 
 # include <iostream>
-# include <map>
+# include <ctime>
 # include "Parser.hpp"
-
-# define DATA "data.csv"
-# define DB std::map<time_t, float>
-
-namespace Database
-{
-	DB initDatabase(void);
-}
+# include "Database.hpp"
 
 class BitcoinExchange
 {
 
 	private:
 		static DB _db;
-
-		static int errorPrinter(std::string msg);
 		
 		BitcoinExchange(void);
 		BitcoinExchange(const BitcoinExchange &copy);

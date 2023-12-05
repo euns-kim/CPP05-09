@@ -4,25 +4,14 @@
 
 DB BitcoinExchange::_db = Database::initDatabase();
 
-DB Database::initDatabase(void)
-{
-
-}
-
 /* Static functions */
 
 int BitcoinExchange::btc(std::string inputFile)
 {
 	if (_db.empty())
-		return (errorPrinter("database is empty"));
+		return (Parser::errorPrinter("[BTC] database is empty"));
 	if (inputFile.empty())
-		return (errorPrinter("input filename is unknown"));
-}
-
-int BitcoinExchange::errorPrinter(std::string msg)
-{
-	cout << "Error: " << msg << endl;
-	return (EXIT_FAILURE);
+		return (Parser::errorPrinter("[BTC] input filename is unknown"));
 }
 
 /* Orthodox Canonical Form */
