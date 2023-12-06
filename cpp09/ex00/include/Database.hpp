@@ -1,13 +1,14 @@
 #ifndef DATABASE_HPP
 # define DATABASE_HPP
 
-# define DATA "data.csv"
-# define DB std::map<time_t, float>
-# define PAIR std::pair<time_t, float>
-
 # include <map>
 # include <fstream>
 # include "Parser.hpp"
+
+# define DATA "data.csv"
+
+typedef std::map<time_t, float> DB;
+typedef std::pair<time_t, float> PAIR;
 
 typedef enum e_DB_exit_code
 {
@@ -20,7 +21,7 @@ typedef enum e_DB_exit_code
 
 namespace Database
 {
-	DB emptyMap();
+	DB emptyMap(void);
 	DB initDatabase(void);
 	std::pair<DB_exit_code, DB> parseDatabase(void);
 	void errorPrinter(DB_exit_code error);

@@ -4,12 +4,13 @@
 
 int Parser::errorPrinter(std::string msg)
 {
-	cout << "Error: " << msg << endl;
+	cerr << "Error: [BTC] " << msg << endl;
 	return (EXIT_FAILURE);
 }
 
-bool Parser::isDate(std::string date)
+bool Parser::isDate(std::string &date)
 {
+	trimWhitespaces(date);
 	if (date.length() != 10)
 		return (false);
 
@@ -50,7 +51,6 @@ time_t Parser::makeTime(std::string date)
 	timeinfo.tm_min = 0;
 	timeinfo.tm_sec = 0;
 
-	// strptime(date.c_str(), "%Y-%m-%d", &tm);
 	return (mktime(&timeinfo));
 }
 
@@ -59,3 +59,20 @@ void	Parser::trimWhitespaces(std::string &input)
 	input.erase(0, input.find_first_not_of(WHITESPACES)); // trim leading white space
 	input.erase(input.find_last_not_of(WHITESPACES) + 1); // trim trailing white space
 }
+
+float	Parser::readFloatValue(std::string &number)
+{
+	trimWhitespaces(number);
+	const char *numPtr = number.c_str();
+	char *endPtr;
+	double value = strtod(numPtr, &endPtr);
+
+	if (endPtr == numPtr || *endPtr != '\0')
+		return (-3);
+	if (value < 0)
+		return (-2);
+	if (value > static_cast<double>(FLT_MAX))
+		return (-1);
+	return (static_cast<double>(value));
+}
+ 

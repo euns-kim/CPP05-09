@@ -9,9 +9,75 @@ DB BitcoinExchange::_db = Database::initDatabase();
 int BitcoinExchange::btc(std::string inputFile)
 {
 	if (_db.empty())
-		return (Parser::errorPrinter("[BTC] database is empty"));
+		return (Parser::errorPrinter("database is empty"));
 	if (inputFile.empty())
-		return (Parser::errorPrinter("[BTC] input filename is unknown"));
+		return (Parser::errorPrinter("input filename is unknown"));
+
+	std::ifstream input(inputFile);
+
+	if (!input.is_open())
+		return (Parser::errorPrinter("input file could not be opend"));
+
+	std::string line;
+
+	getline(input, line);
+	if (input.eof())
+		return (Parser::errorPrinter("input file is empty"));
+	if (input.bad())
+		return (Parser::errorPrinter("stream error while reading input file"));
+	if (line.compare("date | value") != 0)
+		return (Parser::errorPrinter("wrong input detected"));
+
+	while (getline(input, line))
+	{
+		size_t pos = line.find('|');
+		if (pos == std::string::npos)
+			Parser::errorPrinter("bad input => [" + line + "]");
+		else
+		{
+			std::string dateStr = line.substr(0, pos);
+			std::string	valueStr = line.substr(pos + 1);
+
+			if (!Parser::isDate(dateStr))
+			{
+				Parser::errorPrinter("bad date => [" + dateStr + "]");
+				break;
+			}
+
+			float parsed = Parser::readFloatValue(valueStr);
+			if (parsed == -3)
+				Parser::errorPrinter("bad value => [" + valueStr + "]");
+			else if (parsed == -2)
+				Parser::errorPrinter("not a positive number => [" + valueStr + "]");
+			else if (parsed == -1 || parsed > 1000)
+				Parser::errorPrinter("too large a number => [" + valueStr + "]");
+			else
+			{
+				parsed = BTCcalculator(dateStr, parsed);
+				if (parsed == -1)
+					Parser::errorPrinter("no exchange rate found for this date => [" + dateStr + "]");
+				else
+					cout << dateStr << " => " << valueStr << " = " << parsed << endl;
+			}
+		}
+	}
+	if (input.bad())
+		return (Parser::errorPrinter("stream error while reading input file"));
+	input.close();
+	return (0);
+}
+
+float	BitcoinExchange::BTCcalculator(std::string dateStr, float parsed)
+{
+	time_t key = Parser::makeTime(dateStr);
+
+	DB::iterator it = _db.find(key);
+	if (it != _db.end())
+		return (it->second * parsed);
+	it = _db.upper_bound(key);
+	if (it == _db.end())
+		return (-1); // no data for this date
+	return (it->second * parsed); // takes value of upper bound key
 }
 
 /* Orthodox Canonical Form */

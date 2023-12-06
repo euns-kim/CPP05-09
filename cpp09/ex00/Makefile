@@ -19,6 +19,9 @@ HEADERS = -I $(INCLUDE_DIR)
 
 SRC_DIR = ./src/
 SRC = \
+BitcoinExchange.cpp \
+Database.cpp \
+Parser.cpp \
 main.cpp
 SRCS = $(addprefix $(SRC_DIR),$(SRC))
 

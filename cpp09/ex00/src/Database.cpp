@@ -2,9 +2,9 @@
 
 /* DB initiation */
 
-DB Database::emptyMap()
+DB Database::emptyMap(void)
 {
-    return DB();
+	return (DB());
 }
 
 DB Database::initDatabase(void)
@@ -18,29 +18,27 @@ DB Database::initDatabase(void)
 
 std::pair<DB_exit_code, DB> Database::parseDatabase(void)
 {
+	DB tmpMap;
+	PAIR tmpPair;
 	std::ifstream data(DATA);
 
 	if (!data.is_open())
-		return (std::make_pair(DB_OPEN_ERROR, emptyMap()));
-	if (data.eof())
-		return (std::make_pair(DB_EMPTY_DATA, emptyMap()));
-	if (data.fail() || !data.good())
-		return (std::make_pair(DB_FSTREAM_ERROR, emptyMap()));
-
-	DB tmpDB;
-	PAIR tmpPair;
+		return (std::make_pair(DB_OPEN_ERROR, tmpMap));
 
 	char delim[2] = {'\n', ','};
 	bool button = true;
 	std::string	line;
 
 	getline(data, line);
+	if (data.eof())
+		return (std::make_pair(DB_EMPTY_DATA, tmpMap));
+	if (data.bad())
+		return (std::make_pair(DB_FSTREAM_ERROR, tmpMap));
 	if (line.compare("date,exchange_rate") != 0)
-		return (std::make_pair(DB_WRONG_DATA, emptyMap()));
+		return (std::make_pair(DB_WRONG_DATA, tmpMap));
 
 	while (getline(data, line, delim[button]))
 	{
-		Parser::trimWhitespaces(line);
 		if (button == true)
 		{
 			if (Parser::isDate(line))
@@ -50,27 +48,38 @@ std::pair<DB_exit_code, DB> Database::parseDatabase(void)
 		}
 		else
 		{
-			// check exchange rate;
-			// add it to pair
-			// add the pair to db;
+			tmpPair.second = Parser::readFloatValue(line);
+			if (tmpPair.second < 0)
+				return (std::make_pair(DB_WRONG_DATA, emptyMap()));
+			
 		}
+		tmpMap.insert(tmpPair);
 		button = !button;
 	}
+	if (data.bad())
+		return (std::make_pair(DB_FSTREAM_ERROR, emptyMap()));
 	data.close();
+	return (std::make_pair(DB_SUCCESS, tmpMap));
 }
 
 void Database::errorPrinter(DB_exit_code error)
 {
+	cout << "Error: [DB] ";
     switch (error)
 	{
-		case 1:
+		case DB_OPEN_ERROR:
+			cerr << "data file could not be opend" << endl;
 			break;
-		case 2:
+		case DB_EMPTY_DATA:
+			cerr << "data file is empty" << endl;
 			break;
-		case 3:
+		case DB_FSTREAM_ERROR:
+			cerr << "stream error while reading data file" << endl;
 			break;
-		case 4:
+		case DB_WRONG_DATA:
+			cerr << "wrong data detected" << endl;
 			break;
 		default:
+			cerr << "something is wrong with DB parsing" << endl;
     }
 }

@@ -3,7 +3,6 @@
 
 # include <iostream>
 # include <ctime>
-# include "Parser.hpp"
 # include "Database.hpp"
 
 class BitcoinExchange
@@ -11,7 +10,9 @@ class BitcoinExchange
 
 	private:
 		static DB _db;
-		
+
+		static float BTCcalculator(std::string dateStr, float parsed);
+
 		BitcoinExchange(void);
 		BitcoinExchange(const BitcoinExchange &copy);
 		BitcoinExchange &operator=(const BitcoinExchange &op);
@@ -22,5 +23,4 @@ class BitcoinExchange
 
 };
 
-\
 #endif
