@@ -68,7 +68,7 @@ void Database::errorPrinter(DB_exit_code error)
     switch (error)
 	{
 		case DB_OPEN_ERROR:
-			cerr << "data file could not be opend" << endl;
+			cerr << "data file could not be opened" << endl;
 			break;
 		case DB_EMPTY_DATA:
 			cerr << "data file is empty" << endl;

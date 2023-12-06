@@ -2,7 +2,7 @@
 
 /* Helper functions for parsing */
 
-int Parser::errorPrinter(std::string msg)
+int Parser::errorPrinter(std::string const &msg)
 {
 	cerr << "Error: [BTC] " << msg << endl;
 	return (EXIT_FAILURE);
@@ -36,7 +36,7 @@ bool Parser::isDate(std::string &date)
 	return (day <= daysOfMonth[month]);
 }
 
-time_t Parser::makeTime(std::string date)
+time_t Parser::makeTime(std::string const &date)
 {
 	int year = atoi(date.c_str());
 	int month = atoi(date.c_str() + 5);
@@ -71,8 +71,8 @@ float	Parser::readFloatValue(std::string &number)
 		return (-3);
 	if (value < 0)
 		return (-2);
-	if (value > static_cast<double>(FLT_MAX))
+	if (value > static_cast<double>(std::numeric_limits<float>::max()))
 		return (-1);
-	return (static_cast<double>(value));
+	return (static_cast<float>(value));
 }
  

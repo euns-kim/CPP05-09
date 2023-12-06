@@ -16,7 +16,7 @@ int BitcoinExchange::btc(std::string inputFile)
 	std::ifstream input(inputFile);
 
 	if (!input.is_open())
-		return (Parser::errorPrinter("input file could not be opend"));
+		return (Parser::errorPrinter("input file could not be opened"));
 
 	std::string line;
 
@@ -30,6 +30,9 @@ int BitcoinExchange::btc(std::string inputFile)
 
 	while (getline(input, line))
 	{
+		if (line.empty())
+			continue;
+
 		size_t pos = line.find('|');
 		if (pos == std::string::npos)
 			Parser::errorPrinter("bad input => [" + line + "]");
@@ -79,8 +82,8 @@ float	BitcoinExchange::BTCcalculator(std::string dateStr, float parsed)
 	DB::iterator it = _db.find(key);
 	if (it != _db.end())
 		return (it->second * parsed); // takes the value of the key
-	it = _db.upper_bound(key);
-	if (it == _db.end())
+	it = _db.lower_bound(key);
+	if (it == _db.begin())
 		return (-1); // no data for this date
 	return (it->second * parsed); // takes the value of the upper bound key
 }
