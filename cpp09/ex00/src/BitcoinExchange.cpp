@@ -38,27 +38,7 @@ int BitcoinExchange::btc(std::string inputFile)
 			std::string dateStr = line.substr(0, pos);
 			std::string	valueStr = line.substr(pos + 1);
 
-			if (!Parser::isDate(dateStr))
-			{
-				Parser::errorPrinter("bad date => [" + dateStr + "]");
-				break;
-			}
-
-			float parsed = Parser::readFloatValue(valueStr);
-			if (parsed == -3)
-				Parser::errorPrinter("bad value => [" + valueStr + "]");
-			else if (parsed == -2)
-				Parser::errorPrinter("not a positive number => [" + valueStr + "]");
-			else if (parsed == -1 || parsed > 1000)
-				Parser::errorPrinter("too large a number => [" + valueStr + "]");
-			else
-			{
-				parsed = BTCcalculator(dateStr, parsed);
-				if (parsed == -1)
-					Parser::errorPrinter("no exchange rate found for this date => [" + dateStr + "]");
-				else
-					cout << dateStr << " => " << valueStr << " = " << parsed << endl;
-			}
+			handleErrorAndCalculate(dateStr, valueStr);
 		}
 	}
 	if (input.bad())
@@ -67,17 +47,42 @@ int BitcoinExchange::btc(std::string inputFile)
 	return (0);
 }
 
+void	BitcoinExchange::handleErrorAndCalculate(std::string& dateStr, std::string& valueStr)
+{
+	if (!Parser::isDate(dateStr))
+	{
+		Parser::errorPrinter("bad date => [" + dateStr + "]");
+		return ;
+	}
+
+	float parsed = Parser::readFloatValue(valueStr);
+	if (parsed == -3)
+		Parser::errorPrinter("bad value => [" + valueStr + "]");
+	else if (parsed == -2)
+		Parser::errorPrinter("not a positive number => [" + valueStr + "]");
+	else if (parsed == -1 || parsed > 1000)
+		Parser::errorPrinter("too large a number => [" + valueStr + "]");
+	else
+	{
+		parsed = BTCcalculator(dateStr, parsed);
+		if (parsed == -1)
+			Parser::errorPrinter("no exchange rate found for this date => [" + dateStr + "]");
+		else
+			cout << dateStr << " => " << valueStr << " = " << parsed << endl;
+	}
+}
+
 float	BitcoinExchange::BTCcalculator(std::string dateStr, float parsed)
 {
 	time_t key = Parser::makeTime(dateStr);
 
 	DB::iterator it = _db.find(key);
 	if (it != _db.end())
-		return (it->second * parsed);
+		return (it->second * parsed); // takes the value of the key
 	it = _db.upper_bound(key);
 	if (it == _db.end())
 		return (-1); // no data for this date
-	return (it->second * parsed); // takes value of upper bound key
+	return (it->second * parsed); // takes the value of the upper bound key
 }
 
 /* Orthodox Canonical Form */

@@ -11,6 +11,7 @@ class BitcoinExchange
 	private:
 		static DB _db;
 
+		static void	handleErrorAndCalculate(std::string& dateStr, std::string& valueStr);
 		static float BTCcalculator(std::string dateStr, float parsed);
 
 		BitcoinExchange(void);
