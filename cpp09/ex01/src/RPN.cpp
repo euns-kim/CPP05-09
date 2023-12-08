@@ -61,6 +61,8 @@ void	RPN::calculator(char op)
 			_stack.push(lhs - rhs);
 			break;
 		case '/':
+			if (rhs == 0)
+				throw std::logic_error("a number cannot be divided by 0");
 			_stack.push(lhs / rhs);
 			break;
 		case '*':

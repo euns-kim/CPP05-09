@@ -4,7 +4,9 @@
 # include <vector>
 # include <list>
 # include <iterator>
+# include <sys/time.h>
 # include "Parser.hpp"
+# include "Utils.hpp"
 
 typedef std::pair<int, int> Pair;
 
@@ -24,8 +26,10 @@ class PMergeMe
 		PMergeMe(void);
 
 		IntVec _input;
-		IntVec _resultVec;
-		IntLst _resultLst;
+		IntVec _tmpVec;
+		IntLst _tmpLst;
+		long _elapsedVec;
+		long _elapsedLst;
 
 	public:
 		PMergeMe(IntVec input);
@@ -34,9 +38,16 @@ class PMergeMe
 		~PMergeMe(void);
 
 		void pmm(void);
+		void initContainers(void);
 
+		void sortIntVec(void);
 		PairVec initPairVec(void);
+		void mergeSortFirstVec(PairVec &ab, int const begin, int const end);
+		void mergeVec(PairVec *ab, int const begin, int const mid, int const end);
+
+		void sortIntLst(void);
 		PairLst initPairLst(void);
+		void mergeSortFirstLst(PairLst ab, PairLstIt begin, PairLstIt end);
 
 		void printResult(void);
 
