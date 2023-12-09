@@ -1,6 +1,6 @@
-#include "PMergeMe.hpp"
+#include "PmergeMe.hpp"
 
-PairLstIt	PMergeMe::calculateMidLst(PairLstIt begin, PairLstIt end)
+PairLstIt	PmergeMe::calculateMidLst(PairLstIt begin, PairLstIt end)
 {
 	PairLstIt slow = begin;
 	PairLstIt fast = begin;
@@ -10,67 +10,76 @@ PairLstIt	PMergeMe::calculateMidLst(PairLstIt begin, PairLstIt end)
 		++slow;
 		++fast;
 	}
-	return (++slow);
+	return (slow);
 }
 
-PairLst PMergeMe::createSubLst(PairLstIt begin, PairLstIt end)
+PairLst	PmergeMe::createSubLst(PairLstIt begin, PairLstIt end)
 {
 	PairLst ret;
+	PairLstIt it = begin;
 
-	for (; begin != end; ++begin)
-		ret.push_back(*begin);
+	for (; it != end; ++it)
+		ret.push_back(*it);
 	return (ret);
 }
 
-void	PMergeMe::mergeLst(PairLst &ab, PairLstIt begin, PairLstIt mid, PairLstIt end)
+void	PmergeMe::mergeLst(PairLstIt begin, PairLstIt mid, PairLstIt end)
 {
 	PairLst left = createSubLst(begin, mid);
 	PairLst right = createSubLst(mid, end);
 
-	PairLstIt beginLeft = begin;
-	PairLstIt beginRight = mid;
+	PairLstIt beginLeft = left.begin();
+	PairLstIt beginRight = right.begin();
 	PairLstIt beginAB = begin;
 
-	while (beginLeft != mid && beginRight != end)
+	while (beginLeft != left.end() && beginRight != right.end())
 	{
-		if (*beginLeft < *beginRight)
+		if (beginLeft->first < beginRight->first)
 		{
 			*beginAB = *beginLeft;
-			beginLeft++;
+			++beginLeft;
 		}
 		else
 		{
 			*beginAB = *beginRight;
-			beginRight++;
+			++beginRight;
 		}
-		beginAB++;
+		++beginAB;
 	}
 
-	if (beginLeft != mid)
+	while (beginLeft != left.end())
+	{
 		*beginAB = *beginLeft;
-	if (beginRight != end)
+		++beginAB;
+		++beginLeft;
+	}
+	while (beginRight != right.end())
+	{
 		*beginAB = *beginRight;
+		++beginAB;
+		++beginRight;
+	}
 }
 
-void	PMergeMe::mergeSortFirstLst(PairLst &ab, PairLstIt begin, PairLstIt end)
+void	PmergeMe::mergeSortFirstLst(PairLstIt begin, PairLstIt end)
 {
 	if (std::distance(begin, end) <= 1)
 		return ;
 	
 	PairLstIt mid = calculateMidLst(begin, end);
-	mergeSortFirstLst(ab, begin, mid);
-	mergeSortFirstLst(ab, mid, end);
-	mergeLst(ab, begin, mid, end);
+	mergeSortFirstLst(begin, mid);
+	mergeSortFirstLst(mid, end);
+	mergeLst(begin, mid, end);
 }
 
-PairLst	PMergeMe::initPairLst(void)
+PairLst	PmergeMe::initPairLst(void)
 {
 	PairLst ab;
 
 	IntLstIt it = _tmpLst.begin();
 	int prev;
 
-	for(; it != _tmpLst.end()-- && it != _tmpLst.end(); ++it)
+	for(; it != --_tmpLst.end() && it != _tmpLst.end(); ++it)
 	{
 		prev = *it;
 		++it;
@@ -84,9 +93,13 @@ PairLst	PMergeMe::initPairLst(void)
 	return (ab);
 }
 
-void	PMergeMe::sortIntLst(void)
+void	PmergeMe::sortIntLst(void)
 {
 	PairLst ab = initPairLst();
 
-	mergeSortFirstLst(ab, ab.begin(), ab.end()--);
+	cout << "Before Sorting:" << endl;
+	Test::printPairContainer(ab);
+	mergeSortFirstLst(ab.begin(), ab.end());
+	cout << "After Sorting:" << endl;
+	Test::printPairContainer(ab);
 }

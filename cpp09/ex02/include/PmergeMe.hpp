@@ -7,6 +7,7 @@
 # include <sys/time.h>
 # include "Parser.hpp"
 # include "Utils.hpp"
+# include "Test.hpp"
 
 typedef std::pair<int, int> Pair;
 
@@ -19,23 +20,23 @@ typedef std::list<int> IntLst;
 typedef PairLst::iterator PairLstIt;
 typedef IntLst::iterator IntLstIt;
 
-class PMergeMe
+class PmergeMe
 {
 
 	private:
-		PMergeMe(void);
+		PmergeMe(void);
 
 		IntVec _input;
 		IntVec _tmpVec;
 		IntLst _tmpLst;
-		long _elapsedVec;
-		long _elapsedLst;
+		// long _elapsedVec;
+		// long _elapsedLst;
 
 	public:
-		PMergeMe(IntVec input);
-		PMergeMe(const PMergeMe &copy);
-		PMergeMe &operator=(const PMergeMe &op);
-		~PMergeMe(void);
+		PmergeMe(IntVec input);
+		PmergeMe(const PmergeMe &copy);
+		PmergeMe &operator=(const PmergeMe &op);
+		~PmergeMe(void);
 
 		void pmm(void);
 		void initContainers(void);
@@ -47,13 +48,13 @@ class PMergeMe
 
 		void sortIntLst(void);
 		PairLst initPairLst(void);
-		void mergeSortFirstLst(PairLst &ab, PairLstIt begin, PairLstIt end);
-		void mergeLst(PairLst &ab, PairLstIt begin, PairLstIt mid, PairLstIt end);
+		void mergeSortFirstLst(PairLstIt begin, PairLstIt end);
+		void mergeLst(PairLstIt begin, PairLstIt mid, PairLstIt end);
 		PairLst createSubLst(PairLstIt begin, PairLstIt end);
 		PairLstIt calculateMidLst(PairLstIt begin, PairLstIt end);
 
-		void printResult(void);
-
+		// void printResult(void);
+		
 };
 
 #endif

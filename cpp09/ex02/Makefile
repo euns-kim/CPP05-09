@@ -11,16 +11,16 @@ RESET   := \033[0m
 NAME = PmergeMe
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
-# -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g3
 
 INCLUDE_DIR = ./include
 HEADERS = -I $(INCLUDE_DIR)
 
 SRC_DIR = ./src/
 SRC = \
+PmergeMeLst.cpp \
+PmergeMeVec.cpp \
 PmergeMe.cpp \
-Parser.cpp \
 main.cpp
 SRCS = $(addprefix $(SRC_DIR),$(SRC))
 

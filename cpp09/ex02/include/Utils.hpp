@@ -17,7 +17,7 @@ namespace Utils
 	template <typename T>
 	void	printContainer(T const &container)
 	{
-		container::iterator it = container.begin();
+		typename T::iterator it = container.begin();
 
 		for (; it != container.end(); ++it)
 			cout << *it << " ";

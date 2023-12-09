@@ -11,10 +11,10 @@ using std::endl;
 
 typedef std::vector<int> IntVec;
 
-namespace Parser
-{
-	IntVec parser(std::string numbers);
-	IntVec parser(char **numbers);
-};
+// namespace Parser
+// {
+// 	IntVec parser(std::string numbers);
+// 	IntVec parser(char **numbers);
+// };
 
 #endif
