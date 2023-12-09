@@ -42,12 +42,15 @@ class PMergeMe
 
 		void sortIntVec(void);
 		PairVec initPairVec(void);
-		void mergeSortFirstVec(PairVec &ab, int const begin, int const end);
-		void mergeVec(PairVec *ab, int const begin, int const mid, int const end);
+		void mergeSortFirstVec(PairVec &ab, size_t const begin, size_t const end);
+		void mergeVec(PairVec &ab, size_t const begin, size_t const mid, size_t const end);
 
 		void sortIntLst(void);
 		PairLst initPairLst(void);
-		void mergeSortFirstLst(PairLst ab, PairLstIt begin, PairLstIt end);
+		void mergeSortFirstLst(PairLst &ab, PairLstIt begin, PairLstIt end);
+		void mergeLst(PairLst &ab, PairLstIt begin, PairLstIt mid, PairLstIt end);
+		PairLst createSubLst(PairLstIt begin, PairLstIt end);
+		PairLstIt calculateMidLst(PairLstIt begin, PairLstIt end);
 
 		void printResult(void);
 

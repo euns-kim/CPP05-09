@@ -1,11 +1,49 @@
 #include "PMergeMe.hpp"
 
-void	PMergeMe::mergeSortFirstVec(PairVec &ab, int const begin, int const end)
+void	PMergeMe::mergeVec(PairVec &ab, size_t const begin, size_t const mid, size_t const end)
+{
+	size_t sizeLeft = mid - begin;
+	size_t sizeRight = end - mid + 1; 
+
+	PairVec left(sizeLeft);
+	PairVec right(sizeRight);
+
+	for (size_t i = 0; i < sizeLeft; ++i)
+		left[i] = ab[begin + i];
+	for (size_t i = 0; i < sizeRight; ++i)
+		right[i] = ab[mid + i];
+
+	size_t indexLeft = 0;
+	size_t indexRight = 0;
+	size_t indexAB = begin;
+
+	while (indexLeft < sizeLeft && indexRight < sizeRight)
+	{
+		if (left[indexLeft] < right[indexRight])
+		{
+			ab[indexAB] = left[indexLeft];
+			indexLeft++;
+		}
+		else
+		{
+			ab[indexAB] = right[indexRight];
+			indexRight++;
+		}
+		indexAB++;	
+	}
+
+	if (indexLeft < sizeLeft)
+		ab[indexAB] = left[indexLeft]; 
+	if (indexRight < sizeRight)
+		ab[indexAB] = right[indexRight];
+}
+
+void	PMergeMe::mergeSortFirstVec(PairVec &ab, size_t const begin, size_t const end)
 {
 	if (begin >= end)
 		return ;
 
-	int mid = begin + (end - begin) / 2;
+	size_t mid = begin + (end - begin) / 2;
 	mergeSortFirstVec(ab, begin, mid);
 	mergeSortFirstVec(ab, mid + 1, end);
 	mergeVec(ab, begin, mid, end);
