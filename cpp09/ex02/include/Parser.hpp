@@ -1,20 +1,12 @@
 #ifndef PARSER_HPP
-#define PARSER_HPP
+# define PARSER_HPP
 
-# include <iostream>
-# include <stdexcept>
-# include <string>
+# include <cstdlib>
+# include <climits>
 
-using std::cout;
-using std::cerr;
-using std::endl;
-
-typedef std::vector<int> IntVec;
-
-// namespace Parser
-// {
-// 	IntVec parser(std::string numbers);
-// 	IntVec parser(char **numbers);
-// };
+namespace Parser
+{
+	bool	isValidInput(char **input);
+};
 
 #endif

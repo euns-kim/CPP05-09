@@ -72,14 +72,14 @@ void	PmergeMe::mergeSortFirstLst(PairLstIt begin, PairLstIt end)
 	mergeLst(begin, mid, end);
 }
 
-PairLst	PmergeMe::initPairLst(void)
+PairLst	PmergeMe::initPairLst(IntLst tmpLst)
 {
 	PairLst ab;
 
-	IntLstIt it = _tmpLst.begin();
+	IntLstIt it = tmpLst.begin();
 	int prev;
 
-	for(; it != --_tmpLst.end() && it != _tmpLst.end(); ++it)
+	for(; it != --tmpLst.end() && it != tmpLst.end(); ++it)
 	{
 		prev = *it;
 		++it;
@@ -88,14 +88,27 @@ PairLst	PmergeMe::initPairLst(void)
 		else
 			ab.push_back(std::make_pair(*it, prev));
 	}
-	if (it != _tmpLst.end())
+	if (it != tmpLst.end())
 		ab.push_back(std::make_pair(-1, *it));
 	return (ab);
 }
 
+IntLst	PmergeMe::initIntLst(void)
+{
+	IntLst tmpLst;
+
+	while (*_input != NULL)
+	{
+		tmpLst.push_back(strtol(*_input, NULL, 10));
+		++_input;
+	}
+	return (tmpLst);
+}
+
 void	PmergeMe::sortIntLst(void)
 {
-	PairLst ab = initPairLst();
+	IntLst tmpLst = initIntLst();
+	PairLst ab = initPairLst(tmpLst);
 
 	cout << "Before Sorting:" << endl;
 	Test::printPairContainer(ab);

@@ -1,11 +1,19 @@
 #include "Parser.hpp"
 
-IntVec Parser::parser(std::string numbers)
+bool	Parser::isValidInput(char **input)
 {
+	if (input == NULL || *input == NULL)
+		return (false);
 
-}
+	long int num;
+	char *endPtr;
 
-IntVec Parser::parser(char **numbers)
-{
-	
+	while (*input != NULL)
+	{
+		num = strtol(*input, &endPtr, 10);
+		if (num <= 0 || num > INT_MAX || *endPtr != '\0')
+			return (false);
+		++input;
+	}
+	return (true);
 }

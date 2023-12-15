@@ -12,24 +12,10 @@
 // 	cout << "Time to process a range of " << _tmpLst.size() << " elements with std::list : " << _elapsedLst << " milliseconds" << endl;
 // }
 
-void	PmergeMe::initContainers(void)
-{
-	Utils::fillContainerRange(_tmpVec, _input.begin(), _input.end());
-	Utils::fillContainerRange(_tmpLst, _input.begin(), _input.end());
-}
-
 void	PmergeMe::pmm(void)
 {
-	if (_input.empty())
-		throw std::logic_error("input empty");
-	if (_input.size() < 5 || _input.size() > 3000)
-		throw std::runtime_error("the program sorts 5 to 3000 elements");
-	else
-	{
-		initContainers();
-		sortIntVec();
-		sortIntLst();
-	}
+	sortIntVec();
+	sortIntLst();
 	// printResult();
 }
 
@@ -37,31 +23,30 @@ void	PmergeMe::pmm(void)
 
 PmergeMe::PmergeMe(void)
 {
-	// std::cout << "[PMergeMe] Default constructor called" << RESET << std::endl;
+	// std::cout << "[PmergeMe] Default constructor called" << RESET << std::endl;
 }
 
-PmergeMe::PmergeMe(IntVec input) : _input(input)
+PmergeMe::PmergeMe(char **input, size_t size) : _input(input), _size(size)
 {
-	// std::cout << "[PMergeMe] Default constructor called" << RESET << std::endl;
+	// std::cout << "[PmergeMe] Input constructor called" << RESET << std::endl;
 }
 
 
 PmergeMe::PmergeMe(const PmergeMe &copy)
-: _input(copy._input), _tmpVec(IntVec(copy._tmpVec)), _tmpLst(IntLst(copy._tmpLst))
+: _input(copy._input), _size(copy._size)
 {
-	// std::cout << "[PMergeMe] Copy constructor called" << RESET << std::endl;
+	// std::cout << "[PmergeMe] Copy constructor called" << RESET << std::endl;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &op)
 {
 	_input = op._input;
-	_tmpVec = IntVec(op._tmpVec);
-	_tmpLst = IntLst(op._tmpLst);
-	// std::cout << "[PMergeMe] Copy assignment operator called" << RESET << std::endl;
+	_size = op._size;
+	// std::cout << "[PmergeMe] Copy assignment operator called" << RESET << std::endl;
 	return (*this);
 }
 
 PmergeMe::~PmergeMe(void)
 {
-	// std::cout << "[PMergeMe] Destructor called" << RESET << std::endl;
+	// std::cout << "[PmergeMe] Destructor called" << RESET << std::endl;
 }

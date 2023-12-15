@@ -57,14 +57,14 @@ void	PmergeMe::mergeSortFirstVec(PairVec &ab, size_t const begin, size_t const e
 	mergeVec(ab, begin, mid, end);
 }
 
-PairVec	PmergeMe::initPairVec(void)
+PairVec	PmergeMe::initPairVec(IntVec tmpVec)
 {
 	PairVec ab;
 
-	IntVecIt it = _tmpVec.begin();
+	IntVecIt it = tmpVec.begin();
 	int prev;
 
-	for (; it != --_tmpVec.end() && it != _tmpVec.end(); ++it)
+	for (; it != --tmpVec.end() && it != tmpVec.end(); ++it)
 	{
 		prev = *it;
 		++it;
@@ -73,14 +73,27 @@ PairVec	PmergeMe::initPairVec(void)
 		else
 			ab.push_back(std::make_pair(*it, prev));
 	}
-	if (it != _tmpVec.end())
+	if (it != tmpVec.end())
 		ab.push_back(std::make_pair(-1, *it));
 	return (ab);
 }
 
+IntVec	PmergeMe::initIntVec(void)
+{
+	IntVec tmpVec;
+
+	while (*_input != NULL)
+	{
+		tmpVec.push_back(strtol(*_input, NULL, 10));
+		++_input;
+	}
+	return (tmpVec);
+}
+
 void	PmergeMe::sortIntVec(void)
 {
-	PairVec ab = initPairVec();
+	IntVec tmpVec = initIntVec();
+	PairVec ab = initPairVec(tmpVec);
 	
 	cout << "Before Sorting:" << endl;
 	Test::printPairContainer(ab);
