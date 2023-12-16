@@ -18,9 +18,12 @@ HEADERS = -I $(INCLUDE_DIR)
 
 SRC_DIR = ./src/
 SRC = \
-PmergeMeLst.cpp \
-PmergeMeVec.cpp \
+PmergeMeLstInsert.cpp \
+PmergeMeVecInsert.cpp \
+PmergeMeLstMerge.cpp \
+PmergeMeVecMerge.cpp \
 PmergeMe.cpp \
+Parser.cpp \
 main.cpp
 SRCS = $(addprefix $(SRC_DIR),$(SRC))
 

@@ -7,15 +7,8 @@ using std::endl;
 
 namespace Utils
 {
-	template <typename T, typename It>
-	void	fillContainerRange(T &container, It first, It last)
-	{
-		container.empty();
-		container.insert(container.end(), first, last);
-	}
-
 	template <typename T>
-	void	printContainer(T const &container)
+	void	printContainer(T &container)
 	{
 		typename T::iterator it = container.begin();
 

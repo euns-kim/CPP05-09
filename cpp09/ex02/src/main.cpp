@@ -5,22 +5,29 @@ int main(int argc, char **argv)
 {
 	if (argc == 1)
 	{
-		cerr << "Wrong input. Usage: ./PmergeMe [list of positive integers]" << endl;
+		cout << "Wrong input. Usage: ./PmergeMe [list of positive integers]" << endl;
 		return (1);
 	}
 
 	if (Parser::isValidInput(++argv) == false)
 	{
-		cerr << "Input not valid. Must be a list of positive integers" << endl;
+		cout << "Input not valid. Must be a list of positive integers" << endl;
 		return (1);
 	}
 
-	PmergeMe instance(argv, argc - 1);
+	size_t argNum = argc - 1;
+	if (argNum < 5 || argNum > 3000)
+	{
+		cout << "PmergeMe sorts 5 to 3000 elements" << endl;
+		return (1);
+	}
+
+	PmergeMe instance(argv, argNum);
 
 	try {
 		instance.pmm();
 	} catch (std::exception &e) {
-		cerr << "Exception caught: " << e.what() << endl;
+		cout << "Exception caught: " << e.what() << endl;
 		return (1);
 	}
 

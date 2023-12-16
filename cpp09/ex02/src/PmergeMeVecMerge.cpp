@@ -82,10 +82,11 @@ IntVec	PmergeMe::initIntVec(void)
 {
 	IntVec tmpVec;
 
-	while (*_input != NULL)
+	size_t i = 0;
+	while (*(_input + i) != NULL)
 	{
-		tmpVec.push_back(strtol(*_input, NULL, 10));
-		++_input;
+		tmpVec.push_back(strtol(*(_input + i), NULL, 10));
+		++i;
 	}
 	return (tmpVec);
 }
@@ -94,10 +95,17 @@ void	PmergeMe::sortIntVec(void)
 {
 	IntVec tmpVec = initIntVec();
 	PairVec ab = initPairVec(tmpVec);
-	
-	cout << "Before Sorting:" << endl;
+
 	Test::printPairContainer(ab);
 	mergeSortFirstVec(ab, 0, ab.size() - 1);
-	cout << "After Sorting:" << endl;
-	Test::printPairContainer(ab);
+	initMainAndPendVec(ab);
+	generateJacobsthalVec();
+	generateSequenceVec();
+	// InsertPendToMainVec();
+
+	// Test::printPairContainer(ab);
+	// Utils::printContainer(_mainVec);
+	// Utils::printContainer(_pendVec);
+	// Utils::printContainer(_JacobVec);
+	// Utils::printContainer(_sequenceVec);
 }

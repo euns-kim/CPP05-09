@@ -97,10 +97,11 @@ IntLst	PmergeMe::initIntLst(void)
 {
 	IntLst tmpLst;
 
-	while (*_input != NULL)
+	size_t i = 0;
+	while (*(_input + i) != NULL)
 	{
-		tmpLst.push_back(strtol(*_input, NULL, 10));
-		++_input;
+		tmpLst.push_back(strtol(*(_input + i), NULL, 10));
+		++i;
 	}
 	return (tmpLst);
 }
@@ -110,9 +111,14 @@ void	PmergeMe::sortIntLst(void)
 	IntLst tmpLst = initIntLst();
 	PairLst ab = initPairLst(tmpLst);
 
-	cout << "Before Sorting:" << endl;
-	Test::printPairContainer(ab);
 	mergeSortFirstLst(ab.begin(), ab.end());
-	cout << "After Sorting:" << endl;
+	initMainAndPendLst(ab);
+	generateJacobsthalLst();
+	generateSequenceLst();
+
 	Test::printPairContainer(ab);
+	Utils::printContainer(_mainLst);
+	Utils::printContainer(_pendLst);
+	Utils::printContainer(_JacobLst);
+	Utils::printContainer(_sequenceLst);
 }

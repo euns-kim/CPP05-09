@@ -31,7 +31,6 @@ PmergeMe::PmergeMe(char **input, size_t size) : _input(input), _size(size)
 	// std::cout << "[PmergeMe] Input constructor called" << RESET << std::endl;
 }
 
-
 PmergeMe::PmergeMe(const PmergeMe &copy)
 : _input(copy._input), _size(copy._size)
 {

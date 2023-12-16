@@ -8,6 +8,7 @@
 # include <iostream>
 # include <stdexcept>
 # include <string>
+# include <cmath>
 # include "Utils.hpp"
 # include "Test.hpp"
 # include "Parser.hpp"
@@ -37,6 +38,16 @@ class PmergeMe
 		char	**_input;
 		size_t	_size;
 
+		IntVec	_mainVec;
+		IntVec	_pendVec;
+		std::vector<size_t>	_JacobVec;
+		std::vector<size_t>	_sequenceVec;
+
+		IntLst	_mainLst;
+		IntLst	_pendLst;
+		std::list<size_t>	_JacobLst;
+		std::list<size_t>	_sequenceLst;
+
 	public:
 		PmergeMe(char **input, size_t size);
 		PmergeMe(const PmergeMe &copy);
@@ -45,12 +56,20 @@ class PmergeMe
 
 		void pmm(void);
 
+		/* Merge Vector */
 		void sortIntVec(void);
 		IntVec initIntVec(void);
 		PairVec initPairVec(IntVec tmpVec);
 		void mergeSortFirstVec(PairVec &ab, size_t const begin, size_t const end);
 		void mergeVec(PairVec &ab, size_t const begin, size_t const mid, size_t const end);
 
+		/* Insertion Vector */
+		void initMainAndPendVec(PairVec ab);
+		void generateJacobsthalVec(void);
+		void generateSequenceVec(void);
+		// void InsertPendToMainVec(void);
+
+		/* Merge List */
 		void sortIntLst(void);
 		IntLst initIntLst(void);
 		PairLst initPairLst(IntLst tmpLst);
@@ -58,6 +77,12 @@ class PmergeMe
 		void mergeLst(PairLstIt begin, PairLstIt mid, PairLstIt end);
 		PairLst createSubLst(PairLstIt begin, PairLstIt end);
 		PairLstIt calculateMidLst(PairLstIt begin, PairLstIt end);
+
+		/* Insertion List */
+		void initMainAndPendLst(PairLst ab);
+		void generateJacobsthalLst(void);
+		void generateSequenceLst(void);
+		// void InsertPendToMainLst(void);
 
 		// void printResult(void);
 		
