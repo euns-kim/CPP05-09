@@ -15,7 +15,7 @@
 void	PmergeMe::pmm(void)
 {
 	sortIntVec();
-	sortIntLst();
+	// sortIntLst();
 	// printResult();
 }
 

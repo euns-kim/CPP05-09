@@ -67,8 +67,9 @@ class PmergeMe
 		void initMainAndPendVec(PairVec ab);
 		void generateJacobsthalVec(void);
 		void generateSequenceVec(void);
-		// void InsertPendToMainVec(void);
-
+		void InsertPendToMainVec(void);
+		size_t binarySearchVec(int right, int toInsert);
+		
 		/* Merge List */
 		void sortIntLst(void);
 		IntLst initIntLst(void);
@@ -83,9 +84,10 @@ class PmergeMe
 		void generateJacobsthalLst(void);
 		void generateSequenceLst(void);
 		// void InsertPendToMainLst(void);
+		// size_t binarySearchLst(size_t right, int toInsert);
 
 		// void printResult(void);
-		
+
 };
 
 #endif

@@ -1,9 +1,42 @@
 #include "PmergeMe.hpp"
 
-// void	PmergeMe::InsertPendToMainVec(void)
-// {
-	
-// }
+size_t	PmergeMe::binarySearchVec(int right, int toInsert)
+{
+	int left = 0;
+	int mid;
+
+	while (left <= right)
+	{
+		mid = left + (right - left) / 2;
+
+		if (toInsert > _mainVec.at(mid))
+			left = mid + 1;
+		else if (toInsert < _mainVec.at(mid))
+			right = mid - 1;
+		else
+			return (mid);
+	}
+	if (toInsert > _mainVec.at(mid))
+		return (mid + 1);
+	return (mid);
+}
+
+void	PmergeMe::InsertPendToMainVec(void)
+{
+	if (_pendVec.empty() || _pendVec.size() == 1)
+		return ;
+
+	size_t addedCnt = 0;
+
+	std::vector<size_t>::iterator it = _sequenceVec.begin();
+	for (; it != _sequenceVec.end(); ++it)
+	{
+		int toInsert = _pendVec.at(*it);
+		size_t pos = binarySearchVec(*it + 1 + addedCnt, toInsert);
+		_mainVec.insert(_mainVec.begin() + pos, toInsert);
+		++addedCnt;
+	}
+}
 
 void	PmergeMe::generateSequenceVec(void)
 {

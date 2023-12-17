@@ -111,14 +111,15 @@ void	PmergeMe::sortIntLst(void)
 	IntLst tmpLst = initIntLst();
 	PairLst ab = initPairLst(tmpLst);
 
+	// Test::printPairContainer(ab);
 	mergeSortFirstLst(ab.begin(), ab.end());
 	initMainAndPendLst(ab);
 	generateJacobsthalLst();
 	generateSequenceLst();
 
-	Test::printPairContainer(ab);
-	Utils::printContainer(_mainLst);
-	Utils::printContainer(_pendLst);
-	Utils::printContainer(_JacobLst);
-	Utils::printContainer(_sequenceLst);
+	// Test::printPairContainer(ab);
+	// Utils::printContainer(_pendLst);
+	// Utils::printContainer(_JacobLst);
+	// Utils::printContainer(_sequenceLst);
+	// Utils::printContainer(_mainLst);
 }

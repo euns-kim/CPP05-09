@@ -16,11 +16,11 @@ int main(int argc, char **argv)
 	}
 
 	size_t argNum = argc - 1;
-	if (argNum < 5 || argNum > 3000)
-	{
-		cout << "PmergeMe sorts 5 to 3000 elements" << endl;
-		return (1);
-	}
+	// if (argNum < 5 || argNum > 3000)
+	// {
+	// 	cout << "PmergeMe sorts 5 to 3000 elements" << endl;
+	// 	return (1);
+	// }
 
 	PmergeMe instance(argv, argNum);
 

@@ -96,16 +96,16 @@ void	PmergeMe::sortIntVec(void)
 	IntVec tmpVec = initIntVec();
 	PairVec ab = initPairVec(tmpVec);
 
-	Test::printPairContainer(ab);
+	// Test::printPairContainer(ab);
 	mergeSortFirstVec(ab, 0, ab.size() - 1);
 	initMainAndPendVec(ab);
 	generateJacobsthalVec();
 	generateSequenceVec();
-	// InsertPendToMainVec();
+	InsertPendToMainVec();
 
-	// Test::printPairContainer(ab);
-	// Utils::printContainer(_mainVec);
-	// Utils::printContainer(_pendVec);
-	// Utils::printContainer(_JacobVec);
-	// Utils::printContainer(_sequenceVec);
+	Test::printPairContainer(ab);
+	Utils::printContainer(_mainVec);
+	Utils::printContainer(_pendVec);
+	Utils::printContainer(_JacobVec);
+	Utils::printContainer(_sequenceVec);
 }
