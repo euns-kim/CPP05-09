@@ -93,19 +93,31 @@ IntVec	PmergeMe::initIntVec(void)
 
 void	PmergeMe::sortIntVec(void)
 {
+	struct timeval start, end;
+	gettimeofday(&start, NULL);
+
 	IntVec tmpVec = initIntVec();
 	PairVec ab = initPairVec(tmpVec);
 
 	// Test::printPairContainer(ab);
 	mergeSortFirstVec(ab, 0, ab.size() - 1);
 	initMainAndPendVec(ab);
+
+	// Test::printPairContainer(ab);
+	// Utils::printContainer(_mainVec);
+	// Utils::printContainer(_pendVec);
+
 	generateJacobsthalVec();
 	generateSequenceVec();
-	InsertPendToMainVec();
+	insertPendToMainVec();
+	insertLastToMainVec();
 
-	Test::printPairContainer(ab);
-	Utils::printContainer(_mainVec);
-	Utils::printContainer(_pendVec);
-	Utils::printContainer(_JacobVec);
-	Utils::printContainer(_sequenceVec);
+	// Utils::printContainer(_JacobVec);
+	// Utils::printContainer(_sequenceVec);
+	// Utils::printContainer(_mainVec);
+
+	gettimeofday(&end, NULL);
+	long seconds = end.tv_sec - start.tv_sec;
+	long microseconds = end.tv_usec - start.tv_usec;
+	_elapsedVec = seconds * 1000000 + microseconds;
 }

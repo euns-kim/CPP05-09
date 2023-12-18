@@ -4,7 +4,7 @@
 
 int Parser::errorPrinter(std::string const &msg)
 {
-	cerr << "Error: [BTC] " << msg << endl;
+	cout << "Error: [BTC] " << msg << endl;
 	return (EXIT_FAILURE);
 }
 

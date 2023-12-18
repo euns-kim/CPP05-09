@@ -4,7 +4,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cerr << "Usage: ./rpn [reverse Polish notation]" << std::endl;
+		std::cout << "Usage: ./rpn [reverse Polish notation]" << std::endl;
 		return (1);
 	}
 	
@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 		rpn.calculateResult();
 		rpn.printResult();
 	} catch (const std::exception &e) {
-		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 }
 

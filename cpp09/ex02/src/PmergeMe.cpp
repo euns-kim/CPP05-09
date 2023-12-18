@@ -2,21 +2,23 @@
 
 /* Method functions */
 
-// void PmergeMe::printResult(void)
-// {
-// 	cout << "Before:\t";
-// 	Utils::printContainer(_input);
-// 	cout << "After:\t";
-// 	Utils::printContainer(_tmpVec);
-// 	cout << "Time to process a range of " << _tmpVec.size() << " elements with std::vector : " << _elapsedVec << " milliseconds" << endl;
-// 	cout << "Time to process a range of " << _tmpLst.size() << " elements with std::list : " << _elapsedLst << " milliseconds" << endl;
-// }
+void PmergeMe::printResult(void)
+{
+	cout << "Before:\t";
+	for (size_t i = 0; i < _size; ++i)
+		cout << *(_input + i) << " ";
+	cout << endl;
+	cout << "After:\t";
+	Utils::printContainer(_mainVec);
+	cout << "Time to process a range of " << _size << " elements with std::vector : " << _elapsedVec << " µs" << endl;
+	cout << "Time to process a range of " << _size << " elements with std::list : " << _elapsedLst << " µs" << endl;
+}
 
 void	PmergeMe::pmm(void)
 {
 	sortIntVec();
-	// sortIntLst();
-	// printResult();
+	sortIntLst();
+	printResult();
 }
 
 /* Orthodox Canonical Form */

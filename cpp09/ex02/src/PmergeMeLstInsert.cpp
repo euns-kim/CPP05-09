@@ -1,9 +1,58 @@
 #include "PmergeMe.hpp"
 
-// void	PmergeMe::InsertPendToMainLst(void)
-// {
-	
-// }
+size_t	PmergeMe::binarySearchLst(int right, int toInsert)
+{
+	int left = 0;
+	int mid;
+	IntLstIt it;
+
+	while (left <= right)
+	{
+		it = _mainLst.begin();
+		mid = left + (right - left) / 2;
+		advance(it, mid);
+		if (toInsert > *it)
+			left = mid + 1;
+		else if (toInsert < *it)
+			right = mid - 1;
+		else
+			return (mid);
+	}
+	if (toInsert > *it)
+		return (mid + 1);
+	return (mid);
+}
+
+void	PmergeMe::insertLastToMainLst(void)
+{
+	if (_last == 0)
+		return ;
+	size_t pos = binarySearchLst(_mainLst.size() - 1, _last);
+	IntLstIt it = _mainLst.begin();
+	advance(it, pos);
+	_mainLst.insert(it, _last);
+}
+
+void	PmergeMe::insertPendToMainLst(void)
+{
+	if (_pendLst.empty() || _pendLst.size() == 1)
+		return ;
+
+	size_t addedCnt = 0;
+
+	std::list<size_t>::iterator it = _sequenceLst.begin();
+	for (; it != _sequenceLst.end(); ++it)
+	{
+		IntLstIt it2 = _pendLst.begin();
+		advance(it2, *it);
+		int toInsert = *it2;
+		size_t pos = binarySearchLst(*it + 1 + addedCnt, toInsert);
+		IntLstIt toInsertIt = _mainLst.begin();
+		advance(toInsertIt, pos);
+		_mainLst.insert(toInsertIt, toInsert);
+		++addedCnt;
+	}
+}
 
 void	PmergeMe::generateSequenceLst(void)
 {
@@ -22,7 +71,9 @@ void	PmergeMe::generateSequenceLst(void)
 			_sequenceLst.push_back(J - 1);
 	}
 
-	prevJ = *(++it);
+	it = _JacobLst.begin();
+	advance(it, n - 1);
+	prevJ = *it;
 	for (J = _pendLst.size(); J > prevJ; --J)
 		_sequenceLst.push_back(J - 1);
 }
@@ -60,6 +111,5 @@ void	PmergeMe::initMainAndPendLst(PairLst ab)
 		++it;
 	}
 
-	if (last != 0)
-		_pendLst.push_back(last);
+	_last = last;
 }

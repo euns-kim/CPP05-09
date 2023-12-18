@@ -108,18 +108,31 @@ IntLst	PmergeMe::initIntLst(void)
 
 void	PmergeMe::sortIntLst(void)
 {
+	struct timeval start, end;
+	gettimeofday(&start, NULL);
+
 	IntLst tmpLst = initIntLst();
 	PairLst ab = initPairLst(tmpLst);
 
 	// Test::printPairContainer(ab);
 	mergeSortFirstLst(ab.begin(), ab.end());
 	initMainAndPendLst(ab);
-	generateJacobsthalLst();
-	generateSequenceLst();
 
 	// Test::printPairContainer(ab);
+	// Utils::printContainer(_mainLst);
 	// Utils::printContainer(_pendLst);
+
+	generateJacobsthalLst();
+	generateSequenceLst();
+	insertPendToMainLst();
+	insertLastToMainLst();
+
 	// Utils::printContainer(_JacobLst);
 	// Utils::printContainer(_sequenceLst);
 	// Utils::printContainer(_mainLst);
+
+	gettimeofday(&end, NULL);
+	long seconds = end.tv_sec - start.tv_sec;
+	long microseconds = end.tv_usec - start.tv_usec;
+	_elapsedLst = seconds * 1000000 + microseconds;
 }

@@ -51,9 +51,8 @@ std::pair<DB_exit_code, DB> Database::parseDatabase(void)
 			tmpPair.second = Parser::readFloatValue(line);
 			if (tmpPair.second < 0)
 				return (std::make_pair(DB_WRONG_DATA, emptyMap()));
-			
+			tmpMap.insert(tmpPair);
 		}
-		tmpMap.insert(tmpPair);
 		button = !button;
 	}
 	if (data.bad())
@@ -68,18 +67,18 @@ void Database::errorPrinter(DB_exit_code error)
     switch (error)
 	{
 		case DB_OPEN_ERROR:
-			cerr << "data file could not be opened" << endl;
+			cout << "data file could not be opened" << endl;
 			break;
 		case DB_EMPTY_DATA:
-			cerr << "data file is empty" << endl;
+			cout << "data file is empty" << endl;
 			break;
 		case DB_FSTREAM_ERROR:
-			cerr << "stream error while reading data file" << endl;
+			cout << "stream error while reading data file" << endl;
 			break;
 		case DB_WRONG_DATA:
-			cerr << "wrong data detected" << endl;
+			cout << "wrong data detected" << endl;
 			break;
 		default:
-			cerr << "something is wrong with DB parsing" << endl;
+			cout << "something is wrong with DB parsing" << endl;
     }
 }

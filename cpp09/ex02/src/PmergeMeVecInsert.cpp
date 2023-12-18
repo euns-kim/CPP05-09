@@ -21,7 +21,15 @@ size_t	PmergeMe::binarySearchVec(int right, int toInsert)
 	return (mid);
 }
 
-void	PmergeMe::InsertPendToMainVec(void)
+void	PmergeMe::insertLastToMainVec(void)
+{
+	if (_last == 0)
+		return ;
+	size_t pos = binarySearchVec(_mainVec.size() - 1, _last);
+	_mainVec.insert(_mainVec.begin() + pos, _last);
+}
+
+void	PmergeMe::insertPendToMainVec(void)
 {
 	if (_pendVec.empty() || _pendVec.size() == 1)
 		return ;
@@ -87,6 +95,5 @@ void	PmergeMe::initMainAndPendVec(PairVec ab)
 		++i;
 	}
 
-	if (last != 0)
-		_pendVec.push_back(last);
+	_last = last;
 }

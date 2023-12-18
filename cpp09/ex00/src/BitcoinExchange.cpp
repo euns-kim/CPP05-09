@@ -78,14 +78,17 @@ void	BitcoinExchange::handleErrorAndCalculate(std::string& dateStr, std::string&
 float	BitcoinExchange::BTCcalculator(std::string dateStr, float parsed)
 {
 	time_t key = Parser::makeTime(dateStr);
+	DB::iterator it;
 
-	DB::iterator it = _db.find(key);
-	if (it != _db.end())
-		return (it->second * parsed); // takes the value of the key
+	for (it = _db.begin(); it != _db.end(); ++it)
+	{
+		if (it->first == key)
+			return (it->second * parsed); // takes the value of the key
+	}
 	it = _db.lower_bound(key);
 	if (it == _db.begin())
 		return (-1); // no data for this date
-	return (it->second * parsed); // takes the value of the upper bound key
+	return ((--it)->second * parsed); // takes the value of the previous date
 }
 
 /* Orthodox Canonical Form */

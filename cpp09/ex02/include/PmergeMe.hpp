@@ -4,11 +4,10 @@
 # include <vector>
 # include <list>
 # include <iterator>
-# include <sys/time.h>
 # include <iostream>
-# include <stdexcept>
 # include <string>
 # include <cmath>
+# include <sys/time.h>
 # include "Utils.hpp"
 # include "Test.hpp"
 # include "Parser.hpp"
@@ -38,6 +37,11 @@ class PmergeMe
 		char	**_input;
 		size_t	_size;
 
+		int		_last;
+
+		double	_elapsedVec;
+		double	_elapsedLst;
+	
 		IntVec	_mainVec;
 		IntVec	_pendVec;
 		std::vector<size_t>	_JacobVec;
@@ -67,7 +71,8 @@ class PmergeMe
 		void initMainAndPendVec(PairVec ab);
 		void generateJacobsthalVec(void);
 		void generateSequenceVec(void);
-		void InsertPendToMainVec(void);
+		void insertPendToMainVec(void);
+		void insertLastToMainVec(void);
 		size_t binarySearchVec(int right, int toInsert);
 		
 		/* Merge List */
@@ -83,10 +88,11 @@ class PmergeMe
 		void initMainAndPendLst(PairLst ab);
 		void generateJacobsthalLst(void);
 		void generateSequenceLst(void);
-		// void InsertPendToMainLst(void);
-		// size_t binarySearchLst(size_t right, int toInsert);
+		void insertPendToMainLst(void);
+		void insertLastToMainLst(void);
+		size_t binarySearchLst(int right, int toInsert);
 
-		// void printResult(void);
+		void printResult(void);
 
 };
 
